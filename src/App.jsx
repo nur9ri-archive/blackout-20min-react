@@ -153,7 +153,7 @@ afterDeath:{p:'12',title:'사망 발표',bg:'broadcast',text:'당신은 아무 �
 choiceAfterDeath:{title:'어떻게 할까?',bg:'broadcast',choices:[['수련원 준비실 이야기를 꺼낸다.','adA',{suspect:'seoyoon',sus:2,truth:1}],['아직 말하지 않는다.','adB',{suspect:'player',lie:1}],['단톡방을 확인한다.','adC',{suspect:'seoyoon',chatObs:1,truth:1}],['유빈을 본다.','adD',{suspect:'yubin',yubin:1}]]},
 adA:{p:'13',title:'강당',bg:'broadcast',text:'“나... 수련원 준비실에 갔던 것 같아.”\n\n모두의 시선이 당신에게 꽂혔다.',choices:[['현장으로 간다','invest1']]},
 adB:{p:'13',title:'강당',bg:'broadcast',text:'말하지 않았다.\n말하는 순간, 모든 게 나를 향할 것 같았다.',choices:[['현장으로 간다','invest1']]},
-adC:{p:'13',title:'단톡방',bg:'class',text:'단톡방 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
+adC:{p:'13',title:'단톡방',bg:'broadcast',text:'단톡방 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
 adD:{p:'13',title:'강당',bg:'broadcast',char:'yubin',text:'유빈은 걱정스러운 얼굴로 당신을 보고 있었다.\n\n“플레이어, 괜찮아?”\n\n그 표정이 이상하게 편해서, 더 불안했다.',choices:[['현장으로 간다','invest1']]},
 invest1:{p:'14',title:'수련원 준비실',bg:'science',text:'수련원 준비실은 통제되어 있었다.\n하지만 문 너머로 보이는 것들이 있었다.\n\n책상 모서리.\n바닥의 작은 조각.\n도윤의 팔.',choices:[['무엇을 먼저 볼까?','choiceInspect1']]},
 choiceInspect1:{title:'무엇을 먼저 볼까?',bg:'science',choices:[['내 상태를 확인한다.','headEvidence',{truth:2,inv:['뒤통수 상처','뒤통수에 최근 충격 흔적이 있다. 내가 먼저 쓰러졌을 가능성이 생겼다.']}],['바닥의 작은 조각을 본다.','glassEvidence',{truth:1,yubin:1,inv:['깨진 액정 조각','수련원 준비실 바닥에서 발견된 휴대폰 액정 조각. 내 것도 도윤 것도 아닌 듯하다.']}],['도윤의 팔을 본다.','biteEvidence',{truth:1,inv:['도윤 팔의 교흔','도윤의 팔에 남은 물린 자국. 누군가 도윤과 몸싸움을 했다.']}],['아무것도 보지 않는다.','noEvidence',{suspect:'player',sus:1}]]},
