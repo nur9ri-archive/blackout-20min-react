@@ -271,6 +271,20 @@ header .progress {
   bottom: 205px;
 }
 
+
+.char.char-phone {
+  width: 54%;
+  max-width: 230px;
+  bottom: 330px;
+  filter: drop-shadow(0 22px 35px rgba(0,0,0,.72));
+}
+
+.char.char-phone img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .scene:has(.char img[src*="char-blood-hand"]) .char {
   width: calc(100% - 44px);
   max-width: calc(100% - 44px);

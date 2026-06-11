@@ -20,6 +20,7 @@ const CHAR = {
   yubin: "/images/char-cha-yubin.webp",
   taeo: "/images/char-kang-taeo.webp",
   seoyoon: "/images/char-han-seoyoon.webp",
+  phone: "/images/char-chat-phone.webp",
 };
 
 const iconMap = {
@@ -139,7 +140,7 @@ rY1:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“괜찮은 �
 rY2:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“그래?”\n유빈은 아주 잠깐 말을 멈췄다.\n\n“그럼 같이 찾자.”',choices:[['다음','call']]},
 rY3:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“앉을래?”\n“아니면... 강당 먼저 갈래?”\n\n유빈은 휴대폰을 확인했다.',choices:[['다음','call']]},
 rY4:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“응.”\n“많이.”\n\n유빈은 웃지 않았다.\n“너 지금 꼭... 뭔가 본 사람 같아.”',choices:[['다음','call']]},
-call:{p:'7',title:'강당 호출',bg:'bath',char:'yubin',text:'휴대폰이 짧게 울렸다.\n단톡방 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
+call:{p:'7',title:'강당 호출',bg:'bath',char:'phone',text:'휴대폰이 짧게 울렸다.\n단톡방 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
 br1:{p:'8',title:'강당',bg:'broadcast',char:'seoyoon',text:'강당에는 서윤, 태오, 유빈이 모여 있었다.\n서윤이 입을 열었다.\n\n“도윤이 안 보여.”\n\n서윤은 당신 쪽을 봤다.\n“플레이어, 혹시 뭐 아는 거 있어?”',choices:[['다음','br2']]},
 br2:{p:'9',title:'강당',bg:'broadcast',char:'seoyoon',text:'“마지막으로 같이 있었던 사람 있어?”',choices:[['대답한다','choiceLast']]},
 choiceLast:{title:'어떻게 할까?',bg:'broadcast',char:'seoyoon',choices:[['마지막으로 같이 있었다고 말한다.','lastA',{truth:1,sus:2}],['아무 말도 하지 않는다.','lastB',{suspect:'player',lie:1,sus:1}],['도윤이 어딨는데?','lastC',{sus:1}],['다른 사람들 반응을 본다.','lastD',{truth:1}]]},
