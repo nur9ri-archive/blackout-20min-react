@@ -23,28 +23,6 @@ const CHAR = {
   phone: "/images/char-chat-phone.webp",
 };
 
-const iconMap = {
-  "손에 묻은 피": "/images/evidence-blood-hand.webp",
-  "뒤통수 상처": "/images/evidence-head-wound.webp",
-  "깨진 액정 조각": "/images/evidence-phone-glass.webp",
-  "도윤 팔의 교흔": "/images/evidence-bite-mark.webp",
-  "서윤 협박 메시지": "/images/evidence-seoyoon-threat-message.webp",
-  "준비실 쪽 목격담": "/images/evidence-seoyoon-hallway-witness.webp",
-};
-
-const baseChat = [
-  ["18:12", "한서윤", "수련회 조별 활동 시작할게."],
-  ["18:13", "강태오", "집 가면 안 됨?"],
-  ["18:15", "서도윤", "태오는 시켜도 안 하잖아."],
-  ["18:15", "강태오", "시비냐?"],
-  ["18:44", "차유빈", "플레이어는 어디 있어?"],
-  ["19:02", "서도윤", "강당 마이크 한 번만 써도 됨?"],
-  ["19:05", "강태오", "또 사고 치려고?"],
-  ["20:26", "차유빈", "플레이어 보면 나한테 말해줘."],
-  ["20:31", "서도윤", "나 잠깐 수련원 준비실 감."],
-  ["20:40", "SYSTEM", "정전"],
-];
-
 const ENDINGS = [
   {
     id: "endPlayerFrame",
@@ -95,15 +73,23 @@ const ENDINGS = [
 
 function createEndingScenes(endings) {
   return endings.reduce((acc, ending) => {
-    acc[ending.id] = {
-      p: "END",
-      title: ending.title,
-      bg: "dark",
-      char: ending.char,
-      endingImage: ending.image,
-      text: ending.pages.join("\n\n"),
-      choices: [["처음부터 다시 하기", "restart"]],
-    };
+    ending.pages.forEach((text, index) => {
+      const key = index === 0 ? ending.id : `${ending.id}_${index + 1}`;
+      const nextKey =
+        index < ending.pages.length - 1
+          ? `${ending.id}_${index + 2}`
+          : "restart";
+
+      acc[key] = {
+        p: "END",
+        title: ending.title,
+        bg: "dark",
+        char: ending.char,
+        endingImage: ending.image,
+        text,
+        choices: [[index < ending.pages.length - 1 ? "다음" : "처음부터 다시 하기", nextKey]],
+      };
+    });
 
     return acc;
   }, {});
@@ -112,15 +98,18 @@ function createEndingScenes(endings) {
 const ENDING_SCENES = createEndingScenes(ENDINGS);
 
 function getEndingIndex(sceneKey) {
-  const index = ENDINGS.findIndex((ending) => sceneKey === ending.id);
+  const index = ENDINGS.findIndex((ending) =>
+    sceneKey === ending.id || sceneKey.startsWith(`${ending.id}_`)
+  );
+
   return index >= 0 ? String(index + 1).padStart(2, "0") : "";
 }
 
 const SCENES = {
 
-start:{title:'정전 20분',text:'고2 수련회 첫날 밤. 산 속 수련원 전체가 정전됐다.\n\n20분 뒤, 같은 반 서도윤이 죽은 채 발견된다.\n그리고 당신은 그의 시체 옆에서 깨어난다.\n손에 묻은 피. 기억은 없다.',start:true},
+start:{title:'정전 20분',text:'고2 수련회 첫날 밤.\n산 속 수련원 전체가 정전됐다.\n\n20분 뒤, 같은 반 서도윤이 죽은 채 발견된다.\n그리고 당신은 그의 시체 옆에서 깨어난다.\n손에 묻은 피. 기억은 없다.',start:true},
 p1:{p:'1',title:'프롤로그',bg:'science',text:'눈을 떴을 때, 가장 먼저 보인 건 수련원 준비실 천장이었다.\n머리가 깨질 듯 아팠다.\n바닥에는 서도윤이 쓰러져 있었다.',choices:[['다음','p2']]},
-p2:{p:'2',title:'프롤로그',bg:'science',char:'bloodHand',text:'손을 내려다보니 피가 묻어 있었다.\n“이게..뭐야..?”\n\n아무것도 기억나지 않았다.\n복도 계단 끝에서 발소리가 다가오는 게 느껴진다.\n“...”',choices:[['화장실로 간다','p3',{inv:['손에 묻은 피','사건 직후 손에 묻어 있었다. 내가 한 짓인지, 누가 그렇게 만든 건지 알 수 없다.'],sus:1,suspect:'player'}]]},
+p2:{p:'2',title:'프롤로그',bg:'science',char:'bloodHand',text:'손을 내려다보니 피가 묻어 있었다.\n“이게..뭐야..?”\n\n아무것도 기억나지 않았다.\n복도 계단 끝에서 발소리가 다가오는 게 느껴진다.\n“...”',choices:[['화장실로 간다','p3',{sus:1,suspect:'player'}]]},
 p3:{p:'3',title:'화장실',bg:'bath',text:'세면대 물소리가 화장실 안에 울렸다. 당신은 손을 씻었다.\n피는 지워졌지만, 머릿속은 여전히 비어 있었다.\n그때 문이 열렸다.',choices:[['다음','p4']]},
 p4:{p:'4',title:'화장실',bg:'bath',char:'yubin',text:'차유빈이었다.\n유빈은 잠깐 멈춰 섰다.\n\n“여기 있었네.”',choices:[['다음','p5']]},
 p5:{p:'5',title:'화장실',bg:'bath',char:'yubin',text:'“다들 플레이어랑 서도윤 찾고 있어.”\n유빈은 당신 얼굴을 가만히 바라봤다.\n\n“플레이어, 왜 그래? 어디 아파?”',choices:[['대답한다','choiceYubin1']]},
@@ -129,7 +118,7 @@ rY1:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“괜찮은 �
 rY2:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“그래?”\n유빈은 아주 잠깐 말을 멈췄다.\n\n“그럼 같이 찾자.”',choices:[['다음','call']]},
 rY3:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“앉을래?”\n“아니면... 강당 먼저 갈래?”\n\n유빈은 휴대폰을 확인했다.',choices:[['다음','call']]},
 rY4:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“응.”\n“많이.”\n\n유빈은 웃지 않았다.\n“너 지금 꼭... 뭔가 본 사람 같아.”',choices:[['다음','call']]},
-call:{p:'7',title:'강당 호출',bg:'bath',char:'phone',text:'휴대폰이 짧게 울렸다.\n단톡방 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
+call:{p:'7',title:'강당 호출',bg:'bath',char:'phone',text:'휴대폰이 짧게 울렸다.\n휴대폰 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
 br1:{p:'8',title:'강당',bg:'broadcast',char:'seoyoon',text:'강당에는 서윤, 태오, 유빈이 모여 있었다.\n서윤이 입을 열었다.\n\n“도윤이 안 보여.”\n\n서윤은 당신 쪽을 봤다.\n“플레이어, 혹시 뭐 아는 거 있어?”',choices:[['다음','br2']]},
 br2:{p:'9',title:'강당',bg:'broadcast',char:'seoyoon',text:'“마지막으로 같이 있었던 사람 있어?”',choices:[['대답한다','choiceLast']]},
 choiceLast:{title:'어떻게 할까?',bg:'broadcast',char:'seoyoon',choices:[['마지막으로 같이 있었다고 말한다.','lastA',{truth:1,sus:2}],['아무 말도 하지 않는다.','lastB',{suspect:'player',lie:1,sus:1}],['도윤이 어딨는데?','lastC',{sus:1}],['다른 사람들 반응을 본다.','lastD',{truth:1}]]},
@@ -139,13 +128,13 @@ lastC:{p:'10',title:'강당',bg:'broadcast',char:'taeo',text:'“도윤이 어�
 lastD:{p:'10',title:'강당',bg:'broadcast',text:'태오는 불쾌해 보였다.\n서윤은 침착했다.\n유빈은 당신만 보고 있었다.\n\n이상하게도, 그게 제일 신경 쓰였다.',choices:[['다음','teacher']]},
 teacher:{p:'11',title:'사망 발표',bg:'broadcast',text:'강당 문이 열렸다.\n담임이 들어왔다.\n\n“수련원 준비실에서 학생이 발견됐다.”\n“...서도윤이다.”',choices:[['다음','afterDeath']]},
 afterDeath:{p:'12',title:'사망 발표',bg:'broadcast',text:'당신은 아무 말도 하지 못했다.\n\n왜냐하면.\n당신은 이미 알고 있었기 때문이다.',choices:[['어떻게 할까?','choiceAfterDeath']]},
-choiceAfterDeath:{title:'어떻게 할까?',bg:'broadcast',choices:[['수련원 준비실 이야기를 꺼낸다.','adA',{suspect:'seoyoon',sus:2,truth:1}],['아직 말하지 않는다.','adB',{suspect:'player',lie:1}],['단톡방을 확인한다.','adC',{suspect:'seoyoon',chatObs:1,truth:1}],['유빈을 본다.','adD',{suspect:'yubin',yubin:1}]]},
+choiceAfterDeath:{title:'어떻게 할까?',bg:'broadcast',choices:[['수련원 준비실 이야기를 꺼낸다.','adA',{suspect:'seoyoon',sus:2,truth:1}],['아직 말하지 않는다.','adB',{suspect:'player',lie:1}],['휴대폰 기록을 확인한다.','adC',{suspect:'seoyoon',truth:1}],['유빈을 본다.','adD',{suspect:'yubin',yubin:1}]]},
 adA:{p:'13',title:'강당',bg:'broadcast',text:'“나... 수련원 준비실에 갔던 것 같아.”\n\n모두의 시선이 당신에게 꽂혔다.',choices:[['현장으로 간다','invest1']]},
 adB:{p:'13',title:'강당',bg:'broadcast',text:'말하지 않았다.\n말하는 순간, 모든 게 나를 향할 것 같았다.',choices:[['현장으로 간다','invest1']]},
-adC:{p:'13',title:'단톡방',bg:'broadcast',text:'단톡방 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
+adC:{p:'13',title:'휴대폰 기록',bg:'broadcast',text:'휴대폰에 남은 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
 adD:{p:'13',title:'강당',bg:'broadcast',char:'yubin',text:'유빈은 걱정스러운 얼굴로 당신을 보고 있었다.\n\n“플레이어, 괜찮아?”\n\n그 표정이 이상하게 편해서, 더 불안했다.',choices:[['현장으로 간다','invest1']]},
 invest1:{p:'14',title:'수련원 준비실',bg:'science',text:'수련원 준비실은 통제되어 있었다.\n하지만 문 너머로 보이는 것들이 있었다.\n\n책상 모서리.\n바닥의 작은 조각.\n도윤의 팔.',choices:[['무엇을 먼저 볼까?','choiceInspect1']]},
-choiceInspect1:{title:'무엇을 먼저 볼까?',bg:'science',choices:[['내 상태를 확인한다.','headEvidence',{truth:2,inv:['뒤통수 상처','뒤통수에 최근 충격 흔적이 있다. 내가 먼저 쓰러졌을 가능성이 생겼다.']}],['바닥의 작은 조각을 본다.','glassEvidence',{truth:1,yubin:1,inv:['깨진 액정 조각','수련원 준비실 바닥에서 발견된 휴대폰 액정 조각. 내 것도 도윤 것도 아닌 듯하다.']}],['도윤의 팔을 본다.','biteEvidence',{truth:1,inv:['도윤 팔의 교흔','도윤의 팔에 남은 물린 자국. 누군가 도윤과 몸싸움을 했다.']}],['아무것도 보지 않는다.','noEvidence',{suspect:'player',sus:1}]]},
+choiceInspect1:{title:'무엇을 먼저 볼까?',bg:'science',choices:[['내 상태를 확인한다.','headEvidence',{truth:2}],['바닥의 작은 조각을 본다.','glassEvidence',{truth:1,yubin:1}],['도윤의 팔을 본다.','biteEvidence',{truth:1}],['아무것도 보지 않는다.','noEvidence',{suspect:'player',sus:1}]]},
 headEvidence:{p:'15',title:'증거',bg:'science',text:'손을 뒤통수에 가져가자, 작은 혹이 만져졌다.\n\n내가 누군가를 때린 게 아니라.\n누군가에게 당한 건 아닐까.',choices:[['다음','taeo1']]},
 glassEvidence:{p:'15',title:'증거',bg:'science',text:'바닥에 작은 액정 조각이 있었다.\n\n내 휴대폰은 멀쩡하다.\n도윤의 휴대폰도 깨져 있지 않았다.',choices:[['다음','taeo1']]},
 biteEvidence:{p:'15',title:'증거',bg:'science',text:'도윤의 팔에 물린 자국이 있었다.\n\n정전 중, 도윤은 누군가와 몸싸움을 했다.',choices:[['다음','taeo1']]},
@@ -164,18 +153,17 @@ yuC:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'유빈은 아무 일 없
 yuD:{p:'19',title:'휴대폰',bg:'hall',text:'당신의 휴대폰은 멀쩡했다.\n\n그렇다면 수련원 준비실의 액정 조각은\n당신 것도, 도윤 것도 아니다.',choices:[['다음','prePolice1']]},
 
 prePolice1:{p:"20",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"강당으로 돌아오자 서윤이 휴대폰을 내려놓았다.\n\n그때 누군가 말했다.\n\n“정전 직전에 준비실 쪽으로 간 사람을 봤다는 얘기가 있어.”",choices:[["다음","prePolice1_2"]]},
-prePolice1_2:{p:"20",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"목격자는 이름을 확실히 말하지 못했다.\n하지만 한 가지는 말했다.\n\n짧은 머리. 단정한 집업. 반장 명찰.\n\n모두의 시선이 서윤에게 옮겨갔다.",choices:[["서윤에게 준비실 쪽에 갔는지 묻는다","prePolice1A",{suspect:"seoyoon",truth:1,inv:["준비실 쪽 목격담","정전 직전 준비실 쪽으로 반장 명찰을 단 학생이 갔다는 목격담. 확실한 증거는 아니지만 서윤을 의심하게 만들기엔 충분하다."]}],["목격담은 애매하다고 말한다","prePolice1B",{suspect:"player"}],["유빈을 본다","prePolice1C",{suspect:"yubin",yubin:1}],["태오를 본다","prePolice1D",{suspect:"taeo"}]]},
+prePolice1_2:{p:"20",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"목격자는 이름을 확실히 말하지 못했다.\n하지만 한 가지는 말했다.\n\n짧은 머리. 단정한 집업. 반장 명찰.\n\n모두의 시선이 서윤에게 옮겨갔다.",choices:[["서윤에게 준비실 쪽에 갔는지 묻는다","prePolice1A",{suspect:"seoyoon",truth:1}],["목격담은 애매하다고 말한다","prePolice1B",{suspect:"player"}],["유빈을 본다","prePolice1C",{suspect:"yubin",yubin:1}],["태오를 본다","prePolice1D",{suspect:"taeo"}]]},
 prePolice1A:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"“서윤아, 정전 직전에 준비실 쪽에 갔어?”\n\n서윤은 바로 대답하지 못했다.\n\n“...잠깐 지나가긴 했어.”\n“근데 안에 들어가진 않았어.”\n\n말은 차분했지만, 모두가 듣기엔 충분히 수상했다.",choices:[["다음","prePolice2"]]},
 prePolice1B:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"당신은 목격담이 너무 애매하다고 말했다.\n\n하지만 그 말이 오히려 이상하게 들렸다.\n\n“왜 네가 서윤을 감싸?”\n\n시선 일부가 다시 당신에게 돌아왔다.",choices:[["다음","prePolice2"]]},
 prePolice1C:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"yubin",text:"당신은 유빈을 봤다.\n\n유빈은 고개를 숙이고 있었다.\n\n그 순간만큼은 유빈보다 서윤 쪽에 더 많은 시선이 쏠려 있었다.",choices:[["다음","prePolice2"]]},
 prePolice1D:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"taeo",text:"태오는 인상을 찌푸렸다.\n\n“왜 또 나를 봐.”\n\n태오의 말투는 날카로웠지만, 이번 목격담과는 잘 맞지 않았다.",choices:[["다음","prePolice2"]]},
 prePolice2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"그때 서윤의 휴대폰 화면이 켜졌다.\n\n잠금화면 위로 도윤에게서 온 예전 메시지 일부가 보였다.",choices:[["다음","prePolice2_2"]]},
-prePolice2_2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"[오늘 밤까지 말 안 하면 다 퍼뜨린다]\n\n서윤이 급하게 화면을 껐다.\n\n강당 안 공기가 바뀌었다.",choices:[["서윤에게 협박받았냐고 묻는다","prePolice2A",{suspect:"seoyoon",points:2,inv:["서윤 협박 메시지","도윤이 서윤에게 보낸 협박성 메시지. 원한관계가 드러나면서 서윤에게 의심이 몰릴 수 있다."]}],["왜 숨겼는지 묻는다","prePolice2B",{suspect:"seoyoon",points:1}],["유빈의 위치 진술을 다시 묻는다","prePolice2C",{suspect:"yubin",yubin:1,truth:1}],["태오와 도윤의 다툼을 꺼낸다","prePolice2D",{suspect:"taeo"}]]},
+prePolice2_2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"[오늘 밤까지 말 안 하면 다 퍼뜨린다]\n\n서윤이 급하게 화면을 껐다.\n\n강당 안 공기가 바뀌었다.",choices:[["서윤에게 협박받았냐고 묻는다","prePolice2A",{suspect:"seoyoon",points:2}],["왜 숨겼는지 묻는다","prePolice2B",{suspect:"seoyoon",points:1}],["유빈의 위치 진술을 다시 묻는다","prePolice2C",{suspect:"yubin",yubin:1,truth:1}],["태오와 도윤의 다툼을 꺼낸다","prePolice2D",{suspect:"taeo"}]]},
 prePolice2A:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“도윤한테 협박받고 있었어?”\n\n서윤은 입술을 깨물었다.\n\n“...그건 사건이랑 상관없어.”\n\n하지만 이미 늦었다.\n원한이 있었다는 말은, 모두에게 가장 이해하기 쉬운 이유가 됐다.",choices:[["다음","prePolice3"]]},
 prePolice2B:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“왜 숨겼어?”\n\n서윤은 한참 뒤에야 말했다.\n\n“말하면 더 커질까 봐.”\n\n그 말은 현실적이었다.\n하지만 동시에 변명처럼 들렸다.",choices:[["다음","prePolice3"]]},
 prePolice2C:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"yubin",text:"당신은 유빈에게 물었다.\n\n“정전됐을 때 정확히 어디 있었어?”\n\n유빈은 잠깐 늦게 대답했다.\n\n“나는... 별관 복도.”\n\n별관 쪽이면 준비실과 멀지 않았다.",choices:[["다음","prePolice3"]]},
 prePolice2D:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"taeo",text:"당신은 태오와 도윤이 다퉜다는 이야기를 꺼냈다.\n\n태오가 바로 목소리를 높였다.\n\n“싸운 거랑 죽인 거랑 같냐?”\n\n태오의 반응은 거칠었다.\n그래서 누군가에겐 더 수상해 보였다.",choices:[["다음","prePolice3"]]},
-
 
 prePolice3:{p:"22",title:"추궁 3",bg:"science",char:"none",text:"머리가 다시 아파왔다.\n\n끊긴 기억 사이로 짧은 장면이 떠올랐다.\n\n누군가 도윤을 밀쳤다.\n누군가 당신 쪽을 돌아봤다.\n그리고 정전.",choices:[["그 얼굴을 떠올린다","prePolice3A",{suspect:"yubin",truth:2}],["기억을 억지로 누른다","prePolice3B",{suspect:"player",sus:1}],["도윤의 팔을 떠올린다","prePolice3C",{suspect:"taeo",truth:1}],["서윤의 협박 메시지를 떠올린다","prePolice3D",{suspect:"seoyoon",points:1}]]},
 prePolice3A:{p:"22-1",title:"추궁 3",bg:"science",char:"yubin",text:"흐릿했던 얼굴이 조금씩 선명해졌다.\n\n겁에 질린 눈.\n떨리던 손.\n\n차유빈이었다.",choices:[["다음","finalAsk"]]},
@@ -185,7 +173,6 @@ prePolice3D:{p:"22-1",title:"추궁 3",bg:"science",char:"yubin",text:"정전 �
 
 finalAsk:{p:'23',title:'마지막 판단',bg:'broadcast',text:'경찰이 도착했다.\n\n수련원 강당 안은 조용했다.\n누군가를 직접 지목하지 않아도, 지금까지의 말과 선택은 이미 한 사람을 향하고 있었다.',choices:[['결말 확인하기','AUTO_END']]},
 
-
   ...ENDING_SCENES,
 };
 
@@ -194,15 +181,10 @@ function initialState() {
     name: "",
     scene: "start",
     history: [],
-    chat: [],
-    chatUnread: 0,
-    invUnread: 0,
-    inv: {},
     sus: 0,
     truth: 0,
     yubin: 0,
     lie: 0,
-    chatObs: 0,
     suspects: { player: 0, taeo: 0, seoyoon: 0, yubin: 0 },
   };
 }
@@ -231,20 +213,10 @@ function applyEffect(state, effect = {}) {
     truth: state.truth + (effect.truth || 0),
     yubin: state.yubin + (effect.yubin || 0),
     lie: state.lie + (effect.lie || 0),
-    chatObs: state.chatObs + (effect.chatObs || 0),
   };
 
   if (effect.suspect) {
     next = addSuspicion(next, effect.suspect, effect.points || 1);
-  }
-
-  if (effect.inv) {
-    const [name, desc] = effect.inv;
-    next = {
-      ...next,
-      inv: { ...next.inv, [name]: desc },
-      invUnread: next.invUnread + 1,
-    };
   }
 
   return next;
@@ -301,28 +273,10 @@ function fillText(text, state) {
     .replaceAll("플레이어", name);
 }
 
-function chatClass(name) {
-  if (name === "한서윤") return "seoyoon";
-  if (name === "강태오") return "taeo";
-  if (name === "서도윤") return "doyoon";
-  if (name === "차유빈") return "yubin";
-  if (name === "SYSTEM") return "system";
-  return "";
-}
-
-function chatAvatar(name) {
-  if (name === "한서윤") return "서";
-  if (name === "강태오") return "태";
-  if (name === "서도윤") return "도";
-  if (name === "차유빈") return "유";
-  return "";
-}
-
 export default function App() {
   const [state, setState] = useState(initialState);
   const [view, setView] = useState("story");
   const [nameInput, setNameInput] = useState("");
-  const [modal, setModal] = useState(null);
 
   useEffect(() => {
     const preloadImages = new Set([
@@ -360,7 +314,6 @@ export default function App() {
     if (key === "restart") {
       setState(initialState());
       setView("story");
-      setModal(null);
       setNameInput("");
       return;
     }
@@ -381,7 +334,6 @@ export default function App() {
     });
 
     setView(nextView);
-    setModal(null);
   };
 
   const back = () => {
@@ -402,7 +354,6 @@ export default function App() {
     }));
 
     setView(last.view);
-    setModal(null);
   };
 
   const startGame = () => {
@@ -413,15 +364,9 @@ export default function App() {
       name: displayName,
       scene: "p1",
       history: [makeHistoryItem("start", "story")],
-      chat: baseChat.map(([time, name, msg]) => [
-        time,
-        name,
-        fillText(msg, { ...prev, name: displayName }),
-      ]),
     }));
 
     setView("story");
-    setModal(null);
   };
 
   const showChoices = () => {
@@ -432,22 +377,6 @@ export default function App() {
     }
 
     setView("choice");
-  };
-
-  const openChat = () => {
-    setState((prev) => ({
-      ...prev,
-      chatUnread: 0,
-      chat: prev.chat.length
-        ? prev.chat
-        : baseChat.map(([time, name, msg]) => [time, name, fillText(msg, prev)]),
-    }));
-    setModal("chat");
-  };
-
-  const openInventory = () => {
-    setState((prev) => ({ ...prev, invUnread: 0 }));
-    setModal("inventory");
   };
 
   const bg = BG[scene.bg || "dark"];
@@ -557,77 +486,6 @@ export default function App() {
           </div>
         )}
       </main>
-
-      {modal === "chat" && (
-        <div className="modal on" onClick={() => setModal(null)}>
-          <div className="sheet chat-panel" onClick={(event) => event.stopPropagation()}>
-            <div className="sheet-head">
-              <strong>2학년 수련회 단톡방</strong>
-              <button className="x" onClick={() => setModal(null)}>
-                닫기
-              </button>
-            </div>
-            <div className="chat-list">
-              {state.chat.map(([time, name, msg], index) => {
-                const cls = chatClass(name);
-
-                if (name === "SYSTEM") {
-                  return (
-                    <div className="chat-row system" key={index}>
-                      <div className="chat-pack">
-                        <div className="bubble">{msg}</div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div className={`chat-row ${cls}`} key={index}>
-                    <div className="chat-avatar">{chatAvatar(name)}</div>
-                    <div className="chat-pack">
-                      <div className="chat-meta">
-                        <span className="chat-name">{name}</span>
-                        <span>{time}</span>
-                      </div>
-                      <div className="bubble">{fillText(msg, state)}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {modal === "inventory" && (
-        <div className="modal on" onClick={() => setModal(null)}>
-          <div className="sheet" onClick={(event) => event.stopPropagation()}>
-            <div className="sheet-head">
-              <strong>증거</strong>
-              <button className="x" onClick={() => setModal(null)}>
-                닫기
-              </button>
-            </div>
-            <div className="inv-grid">
-              {Object.keys(state.inv).length ? (
-                Object.entries(state.inv).map(([name, desc]) => (
-                  <div className="inv-card" key={name}>
-                    <div className="inv-img">
-                      <img src={iconMap[name] || "/images/evidence-placeholder.webp"} alt="" />
-                    </div>
-                    <div className="inv-body">
-                      <div className="inv-title">{name}</div>
-                      <div className="inv-desc">{desc}</div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="muted">아직 확보한 증거가 없습니다.</p>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
