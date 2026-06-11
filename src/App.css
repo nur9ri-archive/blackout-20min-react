@@ -272,19 +272,6 @@ header .progress {
 }
 
 
-.char.char-phone {
-  width: 54%;
-  max-width: 230px;
-  bottom: 330px;
-  filter: drop-shadow(0 22px 35px rgba(0,0,0,.72));
-}
-
-.char.char-phone img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
 .scene:has(.char img[src*="char-blood-hand"]) .char {
   width: calc(100% - 44px);
   max-width: calc(100% - 44px);
@@ -779,23 +766,9 @@ header {
 
 
 /* ep.7 단톡방 푸시알림 휴대폰 전용 고정 */
-.scene-call .char.char-phone {
-  width: 68% !important;
-  max-width: 250px !important;
-  bottom: 315px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 4 !important;
-  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72)) !important;
-}
+.scene-call 
 
-.scene-call .char.char-phone img {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
+.scene-call 
 
 
 /* ghost fix: scene image must not visually reuse previous scene image */
@@ -810,15 +783,26 @@ header {
 }
 
 /* ep.7 phone object: fixed only on call scene */
+.scene-call 
+
+.scene-call
+
+
+/* ep.7 휴대폰 이미지 전용: 여기만 수정하면 됩니다 */
 .scene-call .char.char-phone {
-  width: 100% !important;
-  max-width: 330px !important;
-  bottom: 100px !important;
-  filter: drop-shadow(0 22px 35px rgba(0,0,0,.72)) !important;
+  width: 76% !important;
+  max-width: 320px !important;
+  bottom: 360px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 4 !important;
+  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72)) !important;
 }
 
 .scene-call .char.char-phone img {
+  display: block !important;
   width: 100% !important;
+  max-width: 100% !important;
   height: auto !important;
   object-fit: contain !important;
 }
