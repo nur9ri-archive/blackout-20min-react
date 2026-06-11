@@ -273,9 +273,9 @@ header .progress {
 
 
 .char.char-phone {
-  width: 80%;
+  width: 54%;
   max-width: 230px;
-  bottom: 180px;
+  bottom: 330px;
   filter: drop-shadow(0 22px 35px rgba(0,0,0,.72));
 }
 
@@ -775,4 +775,24 @@ header {
 
 .name-field input {
   display: block !important;
+}
+
+
+/* ep.7 단톡방 푸시알림 휴대폰 전용 고정 */
+.scene-call .char.char-phone {
+  width: 68% !important;
+  max-width: 250px !important;
+  bottom: 315px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 4 !important;
+  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72)) !important;
+}
+
+.scene-call .char.char-phone img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
 }

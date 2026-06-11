@@ -535,7 +535,7 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <div className="scene" style={{ "--scene-bg": bg }}>
+          <div className={`scene scene-${state.scene}`} style={{ "--scene-bg": bg }}>
             <div className="bg" />
             <div className={`char ${ch ? "" : "none"} char-${scene.char || "none"}`}>
               {ch ? <img src={ch} alt="" /> : null}
