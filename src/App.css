@@ -813,7 +813,7 @@ header {
 .scene-call .char.char-phone {
   width: 100% !important;
   max-width: 330px !important;
-  bottom: 80px !important;
+  bottom: 0px !important;
   filter: drop-shadow(0 22px 35px rgba(0,0,0,.72)) !important;
 }
 
