@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Noto+Serif+KR:wght@500;600;700;900&display=swap");
+
 :root {
   --bg: #07080d;
   --panel: rgba(10, 12, 20, 0.9);
@@ -25,7 +27,7 @@ body {
   justify-content: center;
   overflow-x: hidden;
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
   background: #05060a;
 }
 
@@ -792,4 +794,29 @@ header {
   max-width: 100% !important;
   height: auto !important;
   object-fit: contain !important;
+}
+
+
+/* 정전 20분 웹폰트 적용 */
+.card p,
+.ending-card p,
+.main-copy {
+  font-family: "Noto Serif KR", serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+}
+
+.card h2,
+.choice-card h2,
+.ending-card h2,
+.ending-kicker {
+  font-family: "Noto Serif KR", serif !important;
+}
+
+button,
+input,
+.ghost,
+.progress,
+.name-field input {
+  font-family: "Noto Sans KR", sans-serif !important;
 }
