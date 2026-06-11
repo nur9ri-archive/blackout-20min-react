@@ -811,9 +811,9 @@ header {
 
 /* ep.7 phone object: fixed only on call scene */
 .scene-call .char.char-phone {
-  width: 90% !important;
-  max-width: 230px !important;
-  bottom: 140px !important;
+  width: 100% !important;
+  max-width: 240px !important;
+  bottom: 120px !important;
   filter: drop-shadow(0 22px 35px rgba(0,0,0,.72)) !important;
 }
 
