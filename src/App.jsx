@@ -469,7 +469,7 @@ export default function App() {
           이전
         </button>
         <div className="top-title" />
-        <div className="progress">{scene.p || ""}</div>
+        <div className="progress">{scene.p ? (scene.p === "END" ? "END" : `ep.${scene.p}`) : ""}</div>
       </header>
 
       <main id="screen">
