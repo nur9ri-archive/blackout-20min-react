@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const BGNAME = {
@@ -335,6 +335,20 @@ export default function App() {
   const [nameInput, setNameInput] = useState("");
   const [modal, setModal] = useState(null);
 
+  useEffect(() => {
+    const preloadImages = new Set([
+      ...Object.values(BGNAME),
+      ...Object.values(CHAR).filter(Boolean),
+      ...ENDINGS.map((ending) => ending.image),
+      ...Object.values(iconMap),
+    ]);
+
+    preloadImages.forEach((src) => {
+      const image = new Image();
+      image.src = src;
+    });
+  }, []);
+
   const scene = SCENES[state.scene] || SCENES.start;
   const isStart = !!scene.start;
   const isChoiceView = view === "choice";
@@ -497,6 +511,7 @@ export default function App() {
           </div>
         ) : isChoiceView || isChoiceOnlyScene(state.scene) ? (
           <div
+            key={`choice-${state.scene}`}
             className="choice-page"
             style={{ "--scene-bg": bg, "--choice-bg": choiceBg }}
           >
@@ -513,9 +528,9 @@ export default function App() {
             </div>
           </div>
         ) : scene.p === "END" ? (
-          <div className="ending-page">
+          <div key={`ending-${state.scene}`} className="ending-page">
             <div className="ending-hero">
-              {scene.endingImage ? <img src={scene.endingImage} alt="" /> : null}
+              {scene.endingImage ? <img key={`ending-img-${state.scene}`} src={scene.endingImage} alt="" /> : null}
             </div>
 
             <div className="ending-result">
@@ -535,10 +550,10 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <div className={`scene scene-${state.scene}`} style={{ "--scene-bg": bg }}>
+          <div key={`scene-${state.scene}`} className={`scene scene-${state.scene}`} style={{ "--scene-bg": bg }}>
             <div className="bg" />
             <div className={`char ${ch ? "" : "none"} char-${scene.char || "none"}`}>
-              {ch ? <img src={ch} alt="" /> : null}
+              {ch ? <img key={`${state.scene}-${scene.char}-${ch}`} src={ch} alt="" /> : null}
             </div>
             <div className="card">
               <h2>{scene.title}</h2>

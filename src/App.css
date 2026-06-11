@@ -780,9 +780,40 @@ header {
 
 /* ep.7 단톡방 푸시알림 휴대폰 전용 고정 */
 .scene-call .char.char-phone {
-  width: 90% !important;
-  max-width: 260px !important;
-  bottom: 120px !important;
+  width: 68% !important;
+  max-width: 250px !important;
+  bottom: 315px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 4 !important;
+  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72)) !important;
+}
+
+.scene-call .char.char-phone img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+
+/* ghost fix: scene image must not visually reuse previous scene image */
+.scene,
+.choice-page,
+.ending-page,
+.char,
+.char img,
+.ending-hero img {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* ep.7 phone object: fixed only on call scene */
+.scene-call .char.char-phone {
+  width: 68% !important;
+  max-width: 250px !important;
+  bottom: 300px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 4 !important;
