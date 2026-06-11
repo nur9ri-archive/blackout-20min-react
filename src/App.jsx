@@ -73,23 +73,15 @@ const ENDINGS = [
 
 function createEndingScenes(endings) {
   return endings.reduce((acc, ending) => {
-    ending.pages.forEach((text, index) => {
-      const key = index === 0 ? ending.id : `${ending.id}_${index + 1}`;
-      const nextKey =
-        index < ending.pages.length - 1
-          ? `${ending.id}_${index + 2}`
-          : "restart";
-
-      acc[key] = {
-        p: "END",
-        title: ending.title,
-        bg: "dark",
-        char: ending.char,
-        endingImage: ending.image,
-        text,
-        choices: [[index < ending.pages.length - 1 ? "다음" : "처음부터 다시 하기", nextKey]],
-      };
-    });
+    acc[ending.id] = {
+      p: "END",
+      title: ending.title,
+      bg: "dark",
+      char: ending.char,
+      endingImage: ending.image,
+      text: ending.pages.join("\n\n"),
+      choices: [["처음부터 다시 하기", "restart"]],
+    };
 
     return acc;
   }, {});
@@ -98,10 +90,7 @@ function createEndingScenes(endings) {
 const ENDING_SCENES = createEndingScenes(ENDINGS);
 
 function getEndingIndex(sceneKey) {
-  const index = ENDINGS.findIndex((ending) =>
-    sceneKey === ending.id || sceneKey.startsWith(`${ending.id}_`)
-  );
-
+  const index = ENDINGS.findIndex((ending) => sceneKey === ending.id);
   return index >= 0 ? String(index + 1).padStart(2, "0") : "";
 }
 
