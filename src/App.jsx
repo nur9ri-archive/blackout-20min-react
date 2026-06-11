@@ -402,9 +402,13 @@ export default function App() {
 
   const bg = BG[scene.bg || "dark"];
   const ch = CHAR[scene.char || "none"];
-  const endingBg = ENDING_IMG[state.scene]
-    ? `url("${ENDING_IMG[state.scene]}")`
-    : bg;
+
+  // 선택지 화면은 현재 choice 씬 자체가 아니라, 바로 직전 화면의 배경을 사용한다.
+  const lastHistory = readHistoryItem((state.history || [])[Math.max((state.history || []).length - 1, 0)]);
+  const previousScene = lastHistory ? SCENES[lastHistory.scene] : null;
+  const choiceBg = BG[previousScene?.bg || scene.bg || "dark"];
+
+  const endingImage = ENDING_IMG[state.scene] || "";
   const btnLabel =
     scene.choices && scene.choices.length === 1 ? scene.choices[0][0] : "선택하기";
 
@@ -445,7 +449,7 @@ export default function App() {
           </div>
         </div>
       ) : (isChoiceView || isChoiceOnlyScene(state.scene)) ? (
-          <div className="choice-page" style={{ "--scene-bg": bg }}>
+          <div className="choice-page" style={{ "--scene-bg": bg, "--choice-bg": choiceBg }}>
             <div className="choice-bg" />
             <div className="choice-card">
               <h2>{scene.title}</h2>
@@ -459,13 +463,15 @@ export default function App() {
             </div>
           </div>
         ) : scene.p === "END" ? (
-          <div className="scene ending-scene" style={{ "--scene-bg": endingBg }}>
-            <div className="bg" />
+          <div className="ending-page" style={{ "--scene-bg": bg }}>
+            <div className="ending-bg">
+              {endingImage ? <img className="ending-bg-img" src={endingImage} alt="" /> : null}
+            </div>
             <div className="ending-card">
               <h2>{scene.title}</h2>
               <p>{fillText(scene.text, state)}</p>
             </div>
-            <div className="actions">
+            <div className="actions ending-actions">
               {scene.choices ? (
                 <button className="primary" onClick={showChoices}>
                   {btnLabel}
