@@ -228,8 +228,8 @@ header .progress {
     180deg,
     rgba(0,0,0,.12) 0%,
     rgba(0,0,0,.03) 32%,
-    rgba(0,0,0,.38) 66%,
-    rgba(0,0,0,.78) 100%
+    rgba(0,0,0,.24) 66%,
+    rgba(0,0,0,.50) 100%
   );
 }
 
@@ -361,9 +361,9 @@ header .progress {
 .choice-page::after {
   background: linear-gradient(
     180deg,
-    rgba(0,0,0,.24) 0%,
-    rgba(0,0,0,.38) 52%,
-    rgba(0,0,0,.76) 100%
+    rgba(0,0,0,.20) 0%,
+    rgba(0,0,0,.30) 52%,
+    rgba(0,0,0,.68) 100%
   );
 }
 
