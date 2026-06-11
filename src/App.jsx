@@ -26,7 +26,7 @@ const CHAR = {
 const ENDINGS = [
   {
     id: "endPlayerFrame",
-    title: "지가 똑똑히 봤슈 누명 엔딩",
+    title: "지가 똑똑히 봤슈 엔딩",
     char: "yubin",
     image: "/images/ending-player-frame.webp",
     pages: [
