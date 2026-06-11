@@ -273,9 +273,9 @@ header .progress {
 
 
 .char.char-phone {
-  width: 70%;
+  width: 78%;
   max-width: 230px;
-  bottom: 250px;
+  bottom: 210px;
   filter: drop-shadow(0 22px 35px rgba(0,0,0,.72));
 }
 
