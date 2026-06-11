@@ -57,12 +57,19 @@ button {
   overflow: hidden;
 }
 
+#screen {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* header */
 header {
   position: absolute;
   top: 16px;
   left: 18px;
   right: 18px;
   z-index: 50;
+  min-height: 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -76,37 +83,36 @@ header .progress {
 
 .ghost {
   width: 74px;
-  height: 54px;
-  border-radius: 22px;
+  min-width: 74px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
-  font-size: 18px;
+  font-size: 13px;
+  line-height: 1;
   font-weight: 800;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.09);
 }
 
 .progress {
-  min-width: 36px;
-  height: 54px;
+  min-width: 48px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
   color: #fff;
-  font-size: 20px;
+  font-size: 13px;
+  line-height: 1;
   font-weight: 800;
 }
 
 .top-title {
   flex: 1;
-}
-
-#screen {
-  width: 100%;
-  min-height: 100vh;
 }
 
 .app-main header {
@@ -147,10 +153,11 @@ header .progress {
   padding: 0 2px;
   white-space: pre-line;
   color: rgba(255,255,255,.96);
+  font-family: "Noto Serif KR", serif;
   font-size: 13px;
   line-height: 1.45;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
   text-shadow: 0 2px 14px rgba(0,0,0,.95);
 }
 
@@ -167,9 +174,11 @@ header .progress {
 .name-field {
   position: relative;
   width: 100%;
+  margin-bottom: 0;
 }
 
 .name-field input {
+  display: block;
   width: 100%;
   height: 56px;
   padding: 0 56px 0 16px;
@@ -196,6 +205,10 @@ header .progress {
 .name-field:focus-within .name-suffix,
 .name-field.has-value .name-suffix {
   opacity: .95;
+}
+
+.start-card .primary {
+  margin-top: 12px;
 }
 
 /* common scene */
@@ -273,11 +286,29 @@ header .progress {
   bottom: 205px;
 }
 
-
 .scene:has(.char img[src*="char-blood-hand"]) .char {
   width: calc(100% - 44px);
   max-width: calc(100% - 44px);
   bottom: 328px;
+}
+
+/* ep.7 phone object */
+.scene-call .char.char-phone {
+  width: 72%;
+  max-width: 280px;
+  bottom: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72));
+}
+
+.scene-call .char.char-phone img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .card {
@@ -296,20 +327,22 @@ header .progress {
 .card h2 {
   margin: 0 0 12px;
   color: rgba(255,255,255,.48);
+  font-family: "Noto Serif KR", serif;
   font-size: 14px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.2px;
 }
 
-.card p,
-.ending-card p {
+.card p {
   margin: 0;
   white-space: pre-line;
   color: rgba(255,255,255,.94);
+  font-family: "Noto Serif KR", serif;
   font-size: 16px;
   line-height: 1.72;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
 }
 
 .actions {
@@ -332,6 +365,9 @@ header .progress {
   font-size: 17px;
   font-weight: 900;
   line-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* choices */
@@ -359,6 +395,11 @@ header .progress {
 }
 
 .choice-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
   background: linear-gradient(
     180deg,
     rgba(0,0,0,.20) 0%,
@@ -381,6 +422,7 @@ header .progress {
 
 .choice-card h2 {
   margin: 0 0 16px;
+  font-family: "Noto Serif KR", serif;
   font-size: 22px;
   line-height: 1.25;
   letter-spacing: -0.6px;
@@ -406,7 +448,7 @@ header .progress {
   background: rgba(255,255,255,.18);
 }
 
-/* ending: result-card layout */
+/* ending */
 .ending-page {
   position: relative;
   width: 100%;
@@ -440,8 +482,6 @@ header .progress {
   min-height: 46vh;
   object-fit: cover;
   object-position: center top;
-  filter: none !important;
-  transform: none !important;
 }
 
 .ending-hero::after {
@@ -478,6 +518,7 @@ header .progress {
 .ending-kicker {
   margin: 0 0 10px;
   color: rgba(255,255,255,.52);
+  font-family: "Noto Serif KR", serif;
   font-size: 13px;
   line-height: 1;
   font-weight: 900;
@@ -487,6 +528,7 @@ header .progress {
 .ending-card h2 {
   margin: 0 0 18px;
   color: rgba(255,255,255,.96);
+  font-family: "Noto Serif KR", serif;
   font-size: 30px;
   line-height: 1.18;
   letter-spacing: -1.2px;
@@ -496,19 +538,17 @@ header .progress {
   margin: 0;
   white-space: pre-line;
   color: rgba(255,255,255,.9);
+  font-family: "Noto Serif KR", serif;
   font-size: 16px;
   line-height: 1.74;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
 }
 
 .ending-actions {
   width: 100%;
   position: relative;
   z-index: 4;
-}
-
-.ending-actions .primary {
-  width: 100%;
 }
 
 @media (max-height: 760px) {
@@ -531,289 +571,22 @@ header .progress {
   }
 }
 
-/* modals */
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background: rgba(0,0,0,.58);
-}
-
-.sheet {
-  width: 100%;
-  max-width: 430px;
-  max-height: 78vh;
-  overflow: auto;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 26px 26px 0 0;
-  background: #11131c;
-  box-shadow: 0 -20px 60px rgba(0,0,0,.5);
-}
-
-.sheet-head {
-  position: sticky;
-  top: -20px;
-  z-index: 5;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: -20px -20px 14px;
-  padding: 18px 20px 14px;
-  background: #11131c;
-  border-bottom: 1px solid rgba(255,255,255,.09);
-}
-
-.x {
-  width: auto;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-  color: var(--muted);
-}
-
-.chat-list {
-  display: grid;
-  gap: 14px;
-}
-
-.chat-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.chat-avatar {
-  width: 30px;
-  height: 30px;
-  flex: 0 0 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #111;
-  background: #e9e9ef;
-  font-size: 14px;
-  font-weight: 900;
-}
-
-.chat-pack {
-  max-width: 82%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-
-.chat-meta {
-  display: flex;
-  gap: 6px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.chat-name {
-  font-weight: 800;
-  font-size: 12px;
-}
-
-.bubble {
-  max-width: 100%;
-  padding: 10px 12px;
-  border-radius: 16px 16px 16px 5px;
-  background: #f3e6a6;
-  color: #181818;
-  line-height: 1.5;
-  font-size: 14px;
-  white-space: pre-line;
-  box-shadow: 0 3px 10px rgba(0,0,0,.18);
-}
-
-.system {
-  justify-content: center;
-}
-
-.system .chat-avatar,
-.system .chat-meta {
-  display: none;
-}
-
-.system .chat-pack {
-  align-items: center;
-  max-width: 90%;
-}
-
-.system .bubble {
-  border-radius: 999px;
-  background: rgba(242,201,76,.14);
-  color: #f2c94c;
-  font-size: 12px;
-  text-align: center;
-  box-shadow: none;
-}
-
-.inv-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.inv-card {
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 18px;
-  background: rgba(255,255,255,.08);
-}
-
-.inv-img {
-  height: 92px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,.26);
-}
-
-.inv-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.inv-body {
-  padding: 12px;
-}
-
-.inv-title {
-  margin-bottom: 6px;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.inv-desc {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.muted {
-  color: var(--muted);
-}
-
-/* unused bottom buttons stay hidden */
-.bottom {
-  display: none !important;
-}
-
-.bg-name,
-.main-bg-name,
-.ending-image-name,
-.ending-visual {
-  display: none !important;
-}
-
-
-/* UI fix: header size back to compact + start button/input spacing */
-.ghost {
-  width: 74px !important;
-  height: 34px !important;
-  min-width: 74px !important;
-  min-height: 34px !important;
-  border-radius: 999px !important;
-  font-size: 13px !important;
-  line-height: 1 !important;
-  font-weight: 800 !important;
-  padding: 0 !important;
-}
-
-.progress {
-  min-width: 48px !important;
-  height: 34px !important;
-  font-size: 13px !important;
-  line-height: 1 !important;
-  font-weight: 800 !important;
-  align-items: center !important;
-}
-
-header {
-  top: 16px !important;
-  min-height: 34px !important;
-}
-
-.start-card .primary {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 58px !important;
-  min-height: 58px !important;
-  margin-top: 12px !important;
-  padding: 0 !important;
-  line-height: 1 !important;
-  text-align: center !important;
-}
-
-.start-card .name-field {
-  margin-bottom: 0 !important;
-}
-
-.name-field input {
-  display: block !important;
-}
-
-/* ghost fix: scene image must not visually reuse previous scene image */
+/* prevent old image ghosting */
 .scene,
 .choice-page,
 .ending-page,
 .char,
 .char img,
 .ending-hero img {
-  transition: none !important;
-  animation: none !important;
+  transition: none;
+  animation: none;
 }
 
-/* ep.7 휴대폰 이미지 전용: 여기만 수정하면 됩니다 */
-.scene-call .char.char-phone {
-  width: 72% !important;
-  max-width: 280px !important;
-  bottom: 280px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 4 !important;
-  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72)) !important;
-}
-
-.scene-call .char.char-phone img {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-
-
-/* 정전 20분 웹폰트 적용 */
-.card p,
-.ending-card p,
-.main-copy {
-  font-family: "Noto Serif KR", serif !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.4px !important;
-}
-
-.card h2,
-.choice-card h2,
-.ending-card h2,
-.ending-kicker {
-  font-family: "Noto Serif KR", serif !important;
-}
-
+/* font roles */
 button,
 input,
 .ghost,
 .progress,
 .name-field input {
-  font-family: "Noto Sans KR", sans-serif !important;
+  font-family: "Noto Sans KR", sans-serif;
 }
