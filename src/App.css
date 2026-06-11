@@ -86,22 +86,38 @@ header .progress {
   height: 34px !important;
   min-width: 74px !important;
   min-height: 34px !important;
-  border-radius: 999px !important;
-  font-size: 13px !important;
-  line-height: 1 !important;
-  font-weight: 400 !important;
   padding: 0 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: rgba(8, 10, 16, 0.42) !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+
+  backdrop-filter: blur(10px) !important;
+  box-shadow: none !important;
 }
 
 .progress {
   min-width: 48px !important;
   height: 34px !important;
-  font-size: 13px !important;
-  line-height: 1 !important;
-  font-weight: 400 !important;
-  align-items: center !important;
-}
 
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
 .top-title {
   flex: 1;
 }
