@@ -108,7 +108,8 @@ prePolice1A:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"“�
 prePolice1B:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"당신은 목격담이 너무 애매하다고 말했다.\n\n하지만 그 말이 오히려 이상하게 들렸다.\n\n“왜 네가 서윤을 감싸?”\n\n시선 일부가 다시 당신에게 돌아왔다.",choices:[["다음","prePolice2"]]},
 prePolice1C:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"yubin",text:"당신은 유빈을 봤다.\n\n유빈은 고개를 숙이고 있었다.\n\n그 순간만큼은 유빈보다 서윤 쪽에 더 많은 시선이 쏠려 있었다.",choices:[["다음","prePolice2"]]},
 prePolice1D:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"taeo",text:"태오는 인상을 찌푸렸다.\n\n“왜 또 나를 봐.”\n\n태오의 말투는 날카로웠지만, 이번 목격담과는 잘 맞지 않았다.",choices:[["다음","prePolice2"]]},
-prePolice2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"그때 서윤의 휴대폰 화면이 켜졌다.\n\n잠금화면 위로 도윤에게서 온 예전 메시지 일부가 보였다.\n\n[오늘 밤까지 말 안 하면 다 퍼뜨린다]\n\n서윤이 급하게 화면을 껐다.\n\n강당 안 공기가 바뀌었다.",choices:[["서윤에게 협박받았냐고 묻는다","prePolice2A",{suspect:"seoyoon",points:2,inv:["서윤 협박 메시지","도윤이 서윤에게 보낸 협박성 메시지. 원한관계가 드러나면서 서윤에게 의심이 몰릴 수 있다."]}],["왜 숨겼는지 묻는다","prePolice2B",{suspect:"seoyoon",points:1}],["유빈의 위치 진술을 다시 묻는다","prePolice2C",{suspect:"yubin",yubin:1,truth:1}],["태오와 도윤의 다툼을 꺼낸다","prePolice2D",{suspect:"taeo"}]]},
+prePolice2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"그때 서윤의 휴대폰 화면이 켜졌다.\n\n잠금화면 위로 도윤에게서 온 예전 메시지 일부가 보였다.",choices:[["다음","prePolice2_2"]]},
+prePolice2_2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"[오늘 밤까지 말 안 하면 다 퍼뜨린다]\n\n서윤이 급하게 화면을 껐다.\n\n강당 안 공기가 바뀌었다.",choices:[["서윤에게 협박받았냐고 묻는다","prePolice2A",{suspect:"seoyoon",points:2,inv:["서윤 협박 메시지","도윤이 서윤에게 보낸 협박성 메시지. 원한관계가 드러나면서 서윤에게 의심이 몰릴 수 있다."]}],["왜 숨겼는지 묻는다","prePolice2B",{suspect:"seoyoon",points:1}],["유빈의 위치 진술을 다시 묻는다","prePolice2C",{suspect:"yubin",yubin:1,truth:1}],["태오와 도윤의 다툼을 꺼낸다","prePolice2D",{suspect:"taeo"}]]},
 prePolice2A:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“도윤한테 협박받고 있었어?”\n\n서윤은 입술을 깨물었다.\n\n“...그건 사건이랑 상관없어.”\n\n하지만 이미 늦었다.\n원한이 있었다는 말은, 모두에게 가장 이해하기 쉬운 이유가 됐다.",choices:[["다음","prePolice3"]]},
 prePolice2B:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“왜 숨겼어?”\n\n서윤은 한참 뒤에야 말했다.\n\n“말하면 더 커질까 봐.”\n\n그 말은 현실적이었다.\n하지만 동시에 변명처럼 들렸다.",choices:[["다음","prePolice3"]]},
 prePolice2C:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"yubin",text:"당신은 유빈에게 물었다.\n\n“정전됐을 때 정확히 어디 있었어?”\n\n유빈은 잠깐 늦게 대답했다.\n\n“나는... 별관 복도.”\n\n별관 쪽이면 준비실과 멀지 않았다.",choices:[["다음","prePolice3"]]},
@@ -126,10 +127,19 @@ finalAsk:{p:'23',title:'마지막 판단',bg:'broadcast',text:'경찰이 도착�
 truthLead:{p:'21',title:'기억',bg:'science',char:'yubin',text:'끊겼던 기억이 이어졌다.\n\n수련원 준비실.\n서도윤.\n차유빈.\n그리고 피.\n\n그 순간 알았다.\n정전 20분 동안, 차유빈도 그곳에 있었다.',choices:[['진실을 말할까?','choiceTruth']]},
 choiceTruth:{title:'진실을 말할까?',bg:'class',char:'yubin',choices:[['차유빈이 서도윤을 죽였다고 말한다.','endTruth'],['차유빈의 이름을 말하지 않는다.','endCover']]},
 
-endPlayerFrame:{p:'END',title:'플레이어 누명 엔딩',bg:'dark',char:'yubin',text:'유빈이 떨리는 목소리로 말했다.\n\n“처음에 발견된 건 너였잖아.”\n“손에 피도 묻어 있었고.”\n“기억도 안 난다고 했고.”\n\n모두가 당신을 봤다.\n\n당신은 반박하려 했지만, 정확히 기억나는 게 없었다.\n\n결국 경찰은 당신을 데려갔다.\n수련원 창문 너머로 유빈이 보였다.\n\n유빈은 끝까지 울고 있었다.\n그래서 더 찝찝했다.',choices:[['처음부터 다시 하기','restart']]},
-endTaeoFrame:{p:'END',title:'태오 지목 엔딩',bg:'dark',char:'taeo',text:'처음엔 아무도 확신하지 못했다.\n\n하지만 누군가 말했다.\n\n“태오, 도윤이랑 사이 안 좋았잖아.”\n“아까도 싸웠고.”\n“정전 때 강당 근처에 있었다며?”\n\n말들이 하나씩 쌓였다.\n태오가 벌떡 일어났다.\n\n“야, 미쳤냐?”\n“나 아니라고!”\n\n하지만 이미 강당 안의 시선은 태오에게 꽂혀 있었다.\n\n경찰은 태오를 데려갔다.\n태오는 끝까지 아니라고 소리쳤다.',choices:[['처음부터 다시 하기','restart']]},
-endSeoyoonFrame:{p:'END',title:'서윤 누명 엔딩',bg:'dark',char:'seoyoon',text:'범인을 찾기 어려운 가운데, 서윤의 이름이 나왔다.\n\n정전 직전 준비실 쪽으로 갔다는 목격담.\n도윤에게 협박받고 있었다는 메시지.\n그 사실을 숨기려 했던 태도.\n\n하나하나는 완벽하지 않았다.\n하지만 함께 놓이자 너무 그럴듯했다.\n\n서윤은 조용히 말했다.\n\n“나 아니야.”\n“나 정말 안 들어갔어.”\n\n하지만 아무도 쉽게 믿지 않았다.\n\n경찰이 서윤을 데려가는 동안,\n서윤은 딱 한 번 당신을 돌아봤다.\n\n억울하다는 말도 못 할 만큼 지친 얼굴이었다.',choices:[['처음부터 다시 하기','restart']]},
-endYubinConfess:{p:'END',title:'유빈 자백 엔딩',bg:'dark',char:'yubin',text:'증거는 점점 차유빈을 향했다.\n\n깨진 휴대폰.\n정전 당시 위치.\n도윤 팔의 교흔.\n그리고 끊겨 있던 기억.\n\n누군가 떨리는 목소리로 말했다.\n\n“너였어?”\n“차유빈, 네가 범인이었어?”\n\n유빈은 처음엔 고개를 저었다.\n\n“아니야.”\n“나 아니야.”\n\n하지만 시선은 점점 더 유빈에게 모였다.\n\n“너 맞잖아.”\n“증거가 뻔히 있는데.”\n\n그 순간 유빈이 작게 웃었다.\n\n“큭.”\n“큭큭...”\n\n“너희 실은 도윤이 잘 죽었다고 생각하고 있잖아.”\n\n강당이 얼어붙었다.\n\n“여기 서도윤한테 협박 안 받은 사람 있어?”\n“서도윤 나쁜 놈이야.”\n“잘 죽었다고!”\n\n유빈은 숨을 몰아쉬며 소리쳤다.\n\n“오히려 나한테 고마워해야 하는 거 아니야?!”\n\n그 말이 끝나자, 아무도 유빈을 감싸지 않았다.\n경찰이 유빈의 손목을 잡았다.',choices:[['처음부터 다시 하기','restart']]},
+endPlayerFrame:{p:'END',title:'플레이어 누명 엔딩',bg:'dark',char:'yubin',text:'유빈이 떨리는 목소리로 말했다.\n\n“처음에 발견된 건 너였잖아.”\n“손에 피도 묻어 있었고.”\n“기억도 안 난다고 했고.”\n\n모두가 당신을 봤다.',choices:[['다음','endPlayerFrame2']]},
+endPlayerFrame2:{p:'END',title:'플레이어 누명 엔딩',bg:'dark',char:'yubin',text:'당신은 반박하려 했지만, 정확히 기억나는 게 없었다.\n\n결국 경찰은 당신을 데려갔다.',choices:[['다음','endPlayerFrame3']]},
+endPlayerFrame3:{p:'END',title:'플레이어 누명 엔딩',bg:'dark',char:'yubin',text:'수련원 창문 너머로 유빈이 보였다.\n\n유빈은 끝까지 울고 있었다.\n그래서 더 찝찝했다.',choices:[['처음부터 다시 하기','restart']]},
+endTaeoFrame:{p:'END',title:'태오 지목 엔딩',bg:'dark',char:'taeo',text:'처음엔 아무도 확신하지 못했다.\n\n하지만 누군가 말했다.\n\n“태오, 도윤이랑 사이 안 좋았잖아.”\n“아까도 싸웠고.”\n“정전 때 강당 근처에 있었다며?”',choices:[['다음','endTaeoFrame2']]},
+endTaeoFrame2:{p:'END',title:'태오 지목 엔딩',bg:'dark',char:'taeo',text:'말들이 하나씩 쌓였다.\n태오가 벌떡 일어났다.\n\n“야, 미쳤냐?”\n“나 아니라고!”',choices:[['다음','endTaeoFrame3']]},
+endTaeoFrame3:{p:'END',title:'태오 지목 엔딩',bg:'dark',char:'taeo',text:'하지만 이미 강당 안의 시선은 태오에게 꽂혀 있었다.\n\n경찰은 태오를 데려갔다.\n태오는 끝까지 아니라고 소리쳤다.',choices:[['처음부터 다시 하기','restart']]},
+endSeoyoonFrame:{p:'END',title:'서윤 누명 엔딩',bg:'dark',char:'seoyoon',text:'범인을 찾기 어려운 가운데, 서윤의 이름이 나왔다.\n\n정전 직전 준비실 쪽으로 갔다는 목격담.\n도윤에게 협박받고 있었다는 메시지.\n그 사실을 숨기려 했던 태도.',choices:[['다음','endSeoyoonFrame2']]},
+endSeoyoonFrame2:{p:'END',title:'서윤 누명 엔딩',bg:'dark',char:'seoyoon',text:'하나하나는 완벽하지 않았다.\n하지만 함께 놓이자 너무 그럴듯했다.\n\n서윤은 조용히 말했다.\n\n“나 아니야.”\n“나 정말 안 들어갔어.”',choices:[['다음','endSeoyoonFrame3']]},
+endSeoyoonFrame3:{p:'END',title:'서윤 누명 엔딩',bg:'dark',char:'seoyoon',text:'하지만 아무도 쉽게 믿지 않았다.\n\n경찰이 서윤을 데려가는 동안,\n서윤은 딱 한 번 당신을 돌아봤다.\n\n억울하다는 말도 못 할 만큼 지친 얼굴이었다.',choices:[['처음부터 다시 하기','restart']]},
+endYubinConfess:{p:'END',title:'유빈 자백 엔딩',bg:'dark',char:'yubin',text:'증거는 점점 차유빈을 향했다.\n\n깨진 휴대폰.\n정전 당시 위치.\n도윤 팔의 교흔.\n그리고 끊겨 있던 기억.\n\n누군가 떨리는 목소리로 말했다.\n\n“너였어?”\n“차유빈, 네가 범인이었어?”',choices:[['다음','endYubinConfess2']]},
+endYubinConfess2:{p:'END',title:'유빈 자백 엔딩',bg:'dark',char:'yubin',text:'유빈은 처음엔 고개를 저었다.\n\n“아니야.”\n“나 아니야.”\n\n하지만 시선은 점점 더 유빈에게 모였다.\n\n“너 맞잖아.”\n“증거가 뻔히 있는데.”',choices:[['다음','endYubinConfess3']]},
+endYubinConfess3:{p:'END',title:'유빈 자백 엔딩',bg:'dark',char:'yubin',text:'그 순간 유빈이 작게 웃었다.\n\n“큭.”\n“큭큭...”\n\n“너희 실은 도윤이 잘 죽었다고 생각하고 있잖아.”\n\n강당이 얼어붙었다.',choices:[['다음','endYubinConfess4']]},
+endYubinConfess4:{p:'END',title:'유빈 자백 엔딩',bg:'dark',char:'yubin',text:'“여기 서도윤한테 협박 안 받은 사람 있어?”\n“서도윤 나쁜 놈이야.”\n“잘 죽었다고!”\n\n유빈은 숨을 몰아쉬며 소리쳤다.\n\n“오히려 나한테 고마워해야 하는 거 아니야?!”\n\n그 말이 끝나자, 아무도 유빈을 감싸지 않았다.\n경찰이 유빈의 손목을 잡았다.',choices:[['처음부터 다시 하기','restart']]},
 
 endFrame:{p:'END',title:'플레이어 누명 엔딩',bg:'dark',char:'yubin',text:'유빈이 떨리는 목소리로 말했다.\n\n“처음에 발견된 건 너였잖아.”\n“손에 피도 묻어 있었고.”\n“기억도 안 난다고 했고.”\n\n모두가 당신을 봤다.\n\n당신은 반박하려 했지만, 정확히 기억나는 게 없었다.\n\n결국 경찰은 당신을 데려갔다.\n수련원 창문 너머로 유빈이 보였다.\n\n유빈은 끝까지 울고 있었다.\n그래서 더 찝찝했다.',choices:[['처음부터 다시 하기','restart']]},endTaeo:{p:'END',title:'태오 오답 엔딩',bg:'dark',text:'당신은 태오를 지목했다.\n태오는 조사받고 풀려났다.\n\n며칠 뒤, 단톡방에서 아무도 태오의 이름을 꺼내지 않았다.\n\n범인을 찾는다는 말이, 누군가를 범인으로 만드는 말이 될 수도 있었다.',choices:[['처음부터 다시 하기','restart']]},
 endSeoyoon:{p:'END',title:'서윤 오답 엔딩',bg:'dark',text:'당신은 서윤을 지목했다.\n서윤은 끝까지 침착했다.\n\n그리고 다음 날부터, 아무도 서윤에게 말을 걸지 않았다.\n\n진실을 찾은 게 아니라, 그럴듯한 사람을 고른 것뿐이었다.',choices:[['처음부터 다시 하기','restart']]},
@@ -415,7 +425,6 @@ export default function App() {
       <main id="screen">
       {isStart ? (
         <div className="main-start">
-          <div className="main-bg-name">/images/bg-main.webp</div>
           <div className="main-bottom">
             <p className="main-copy">{scene.text}</p>
             <div className="start-card">
@@ -436,7 +445,8 @@ export default function App() {
           </div>
         </div>
       ) : (isChoiceView || isChoiceOnlyScene(state.scene)) ? (
-          <div className="choice-page">
+          <div className="choice-page" style={{ "--scene-bg": bg }}>
+            <div className="choice-bg" />
             <div className="choice-card">
               <h2>{scene.title}</h2>
               <div className="choices">
@@ -450,11 +460,7 @@ export default function App() {
           </div>
         ) : scene.p === "END" ? (
           <div className="scene ending-scene" style={{ "--scene-bg": endingBg }}>
-            <div className="bg">
-              <div className="bg-name">
-                {ENDING_IMG[state.scene] || "/images/ending-placeholder.webp"}
-              </div>
-            </div>
+            <div className="bg" />
             <div className="ending-card">
               <h2>{scene.title}</h2>
               <p>{fillText(scene.text, state)}</p>
@@ -469,10 +475,10 @@ export default function App() {
           </div>
         ) : (
           <div className="scene" style={{ "--scene-bg": bg }}>
-            <div className="bg">
-              <div className="bg-name">{BGNAME[scene.bg || "dark"] || ""}</div>
+            <div className="bg" />
+            <div className={`char ${ch ? "" : "none"} char-${scene.char || "none"}`}>
+              {ch ? <img src={ch} alt="" /> : null}
             </div>
-            <div className={`char ${ch ? "" : "none"} char-${scene.char || "none"}`}> {ch ? <img src={ch} alt="" /> : null} </div>
             <div className="card">
               <h2>{scene.title}</h2>
               <p>{fillText(scene.text, state)}</p>
@@ -540,7 +546,7 @@ export default function App() {
                 Object.entries(state.inv).map(([name, desc]) => (
                   <div className="inv-card" key={name}>
                     <div className="inv-img">
-                      {iconMap[name] || "//images/evidence-placeholder.webp"}
+                      <img src={iconMap[name] || "/images/evidence-placeholder.webp"} alt="" />
                     </div>
                     <div className="inv-name">{name}</div>
                     <div className="inv-desc">{desc}</div>
