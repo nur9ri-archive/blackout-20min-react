@@ -296,7 +296,7 @@ header .progress {
 .scene:has(.char img[src*="char-blood-hand"]) .char {
   width: calc(100% - 44px);
   max-width: calc(100% - 44px);
-  bottom: 328px;
+  bottom: 380px;
 }
 
 /* ep.7 phone object */
