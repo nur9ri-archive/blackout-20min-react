@@ -764,13 +764,6 @@ header {
   display: block !important;
 }
 
-
-/* ep.7 단톡방 푸시알림 휴대폰 전용 고정 */
-.scene-call 
-
-.scene-call 
-
-
 /* ghost fix: scene image must not visually reuse previous scene image */
 .scene,
 .choice-page,
@@ -782,17 +775,11 @@ header {
   animation: none !important;
 }
 
-/* ep.7 phone object: fixed only on call scene */
-.scene-call 
-
-.scene-call
-
-
 /* ep.7 휴대폰 이미지 전용: 여기만 수정하면 됩니다 */
 .scene-call .char.char-phone {
-  width: 72% !important;
-  max-width: 280px !important;
-  bottom: 390px !important;
+  width: 86% !important;
+  max-width: 360px !important;
+  bottom: 250px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 4 !important;
