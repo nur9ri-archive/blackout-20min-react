@@ -340,7 +340,6 @@ export default function App() {
       ...Object.values(BGNAME),
       ...Object.values(CHAR).filter(Boolean),
       ...ENDINGS.map((ending) => ending.image),
-      ...Object.values(iconMap),
     ]);
 
     preloadImages.forEach((src) => {
