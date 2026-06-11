@@ -403,7 +403,8 @@ header {
 }
 
 
-/* 엔딩: 카드형 컨테이너 제거 + 전체 페이지 배경 이미지 */
+
+/* 엔딩: 외곽 카드 제거 + 전체 페이지 배경 이미지 직접 적용 */
 .ending-page {
   position: relative !important;
   width: 100% !important;
@@ -412,51 +413,39 @@ header {
   padding: 76px 22px 28px !important;
   overflow: hidden !important;
   border: 0 !important;
+  outline: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  background: #07080d !important;
+  background-color: #07080d !important;
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-end !important;
 }
 
-.ending-bg {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: var(--scene-bg) !important;
-  filter: none !important;
-  transform: none !important;
-}
-
-.ending-bg-img {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center top !important;
-  filter: none !important;
-  transform: none !important;
-  opacity: 1 !important;
-}
-
-.ending-bg::after {
+.ending-page::before {
   content: "" !important;
   position: absolute !important;
   inset: 0 !important;
   z-index: 1 !important;
+  pointer-events: none !important;
   background: linear-gradient(
     180deg,
-    rgba(0,0,0,.04) 0%,
-    rgba(0,0,0,.18) 42%,
-    rgba(0,0,0,.94) 100%
+    rgba(0,0,0,0.02) 0%,
+    rgba(0,0,0,0.12) 40%,
+    rgba(0,0,0,0.92) 100%
   ) !important;
-  pointer-events: none !important;
+}
+
+/* 구버전 엔딩 배경 요소가 남아도 보이지 않게 처리 */
+.ending-bg,
+.ending-bg-img,
+.ending-page .bg,
+.ending-page .bg-name,
+.scene.ending-scene .bg-name {
+  display: none !important;
 }
 
 .ending-page .ending-card {
@@ -499,14 +488,21 @@ header {
   text-align: center !important;
 }
 
-/* 혹시 구버전 ending-scene이 남아도 카드형 외곽 제거 */
+/* 혹시 App.jsx가 구버전 ending-scene으로 남아도 외곽 카드 강제 제거 */
 .scene.ending-scene {
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 76px 22px 28px !important;
   border: 0 !important;
+  outline: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
-  min-height: 100vh !important;
-  padding: 76px 22px 28px !important;
+}
+.scene.ending-scene::before,
+.scene.ending-scene::after {
+  border-radius: 0 !important;
 }
 
 /* 모달/증거 - 남겨두되 하단 버튼은 숨김 */
@@ -582,4 +578,21 @@ header {
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
+}
+
+
+/* 엔딩 외곽 둥근 카드 잔상 방지 */
+.app:has(.ending-page) {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #07080d !important;
+}
+.app:has(.ending-page) #screen {
+  min-height: 100vh !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
 }

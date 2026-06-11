@@ -409,6 +409,9 @@ export default function App() {
   const choiceBg = BG[previousScene?.bg || scene.bg || "dark"];
 
   const endingImage = ENDING_IMG[state.scene] || "";
+  const endingStyle = endingImage
+    ? { backgroundImage: `linear-gradient(180deg, rgba(0,0,0,.02) 0%, rgba(0,0,0,.16) 45%, rgba(0,0,0,.92) 100%), url("${endingImage}")` }
+    : { background: bg };
   const btnLabel =
     scene.choices && scene.choices.length === 1 ? scene.choices[0][0] : "선택하기";
 
@@ -463,10 +466,7 @@ export default function App() {
             </div>
           </div>
         ) : scene.p === "END" ? (
-          <div className="ending-page" style={{ "--scene-bg": bg }}>
-            <div className="ending-bg">
-              {endingImage ? <img className="ending-bg-img" src={endingImage} alt="" /> : null}
-            </div>
+          <div className="ending-page" style={endingStyle}>
             <div className="ending-card">
               <h2>{scene.title}</h2>
               <p>{fillText(scene.text, state)}</p>
