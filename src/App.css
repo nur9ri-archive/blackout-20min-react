@@ -782,7 +782,7 @@ header {
 .scene-call .char.char-phone {
   width: 78% !important;
   max-width: 250px !important;
-  bottom: 200px !important;
+  bottom: 160px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 4 !important;
