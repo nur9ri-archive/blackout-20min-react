@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const BGNAME = {
@@ -20,6 +20,7 @@ const CHAR = {
   yubin: "/images/char-cha-yubin.webp",
   taeo: "/images/char-kang-taeo.webp",
   seoyoon: "/images/char-han-seoyoon.webp",
+  phone: "/images/char-chat-phone.webp",
 };
 
 const iconMap = {
@@ -53,7 +54,7 @@ const ENDINGS = [
     pages: [
       "유빈이 떨리는 목소리로 말했다.\n\n“처음에 도윤이 옆에서 발견된건 너였어.”\n“손에 피도 묻어 있었고.”\n“기억도 안 난다고 했고.”\n\n모두가 당신을 봤다.",
       "당신은 반박하려 했지만, 정확히 기억나는 게 없었다.\n\n결국 경찰은 당신을 데려갔다.",
-      "수련원 창문 너머로 유빈이 보였다.\n\n유빈은 알 수 없는 표정을 짓고 있었다.\n그래서 더 찝찝했다.",
+      "수련원 창문 너머로 유빈이 보였다.\n\n유빈은 끝까지 울고 있었다.\n그래서 더 찝찝했다.",
     ],
   },
   {
@@ -62,7 +63,7 @@ const ENDINGS = [
     char: "taeo",
     image: "/images/ending-taeo-frame.webp",
     pages: [
-      "처음엔 아무도 확신하지 못했다.\n\n하지만 누군가 말했다.\n\n“태오, 너 도윤이랑 사이 안 좋았잖아.”\n“아까도 싸웠고.”\n“정전 때 강당 근처에서도 싸웠다며?”",
+      "처음엔 아무도 확신하지 못했다.\n\n하지만 누군가 말했다.\n\n“태오, 도윤이랑 사이 안 좋았잖아.”\n“아까도 싸웠고.”\n“정전 때 강당 근처에서도 싸웠다며?”",
       "말들이 하나씩 쌓였다.\n태오가 벌떡 일어났다.\n\n“야, 미쳤냐?”\n“나 아니라고!”",
       "하지만 이미 강당 안의 시선은 태오에게 꽂혀 있었다.\n\n경찰은 태오를 데려갔다.\n태오는 끝까지 아니라고 소리쳤다.",
     ],
@@ -86,7 +87,7 @@ const ENDINGS = [
     pages: [
       "증거는 점점 차유빈을 향했다.\n\n깨진 휴대폰.\n정전 당시 위치.\n도윤 팔의 교흔.\n그리고 끊겨 있던 기억.\n\n누군가 떨리는 목소리로 말했다.\n\n“너였어?”\n“차유빈, 네가 범인이었어?”",
       "유빈은 처음엔 고개를 저었다.\n\n“아니야.”\n“나 아니야.”\n\n하지만 시선은 점점 더 유빈에게 모였다.\n\n“너 맞잖아.”\n“증거가 뻔히 있는데.”",
-      "그 순간 유빈이 작게 웃었다.\n\n“실수였어.”\n난 살짝 물었을 뿐인데..자기 혼자 넘어졌다고..”\n\n“...너희 실은 도윤이 잘 죽었다고 생각하고 있잖아.”\n\n강당이 얼어붙었다.",
+      "그 순간 유빈이 작게 웃었다.\n\n“큭.”\n“큭큭...”\n\n“너희 실은 도윤이 잘 죽었다고 생각하고 있잖아.”\n\n강당이 얼어붙었다.",
       "“여기 서도윤한테 협박 안 받은 사람 있어?”\n“서도윤 나쁜 놈이야.”\n“잘 죽었다고!”\n\n유빈은 숨을 몰아쉬며 소리쳤다.\n\n“오히려 나한테 고마워해야 하는 거 아니야?!”\n\n그 말이 끝나자, 아무도 유빈을 감싸지 않았다.\n경찰이 유빈의 손목을 잡았다.",
     ],
   },
@@ -100,9 +101,7 @@ function createEndingScenes(endings) {
       bg: "dark",
       char: ending.char,
       endingImage: ending.image,
-      text: ending.pages.join("
-
-"),
+      text: ending.pages.join("\n\n"),
       choices: [["처음부터 다시 하기", "restart"]],
     };
 
@@ -111,6 +110,11 @@ function createEndingScenes(endings) {
 }
 
 const ENDING_SCENES = createEndingScenes(ENDINGS);
+
+function getEndingIndex(sceneKey) {
+  const index = ENDINGS.findIndex((ending) => sceneKey === ending.id);
+  return index >= 0 ? String(index + 1).padStart(2, "0") : "";
+}
 
 const SCENES = {
 
@@ -125,7 +129,7 @@ rY1:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“괜찮은 �
 rY2:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“그래?”\n유빈은 아주 잠깐 말을 멈췄다.\n\n“그럼 같이 찾자.”',choices:[['다음','call']]},
 rY3:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“앉을래?”\n“아니면... 강당 먼저 갈래?”\n\n유빈은 휴대폰을 확인했다.',choices:[['다음','call']]},
 rY4:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“응.”\n“많이.”\n\n유빈은 웃지 않았다.\n“너 지금 꼭... 뭔가 본 사람 같아.”',choices:[['다음','call']]},
-call:{p:'7',title:'강당 호출',bg:'bath',char:'yubin',text:'휴대폰이 짧게 울렸다.\n단톡방 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
+call:{p:'7',title:'강당 호출',bg:'bath',char:'phone',text:'휴대폰이 짧게 울렸다.\n단톡방 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
 br1:{p:'8',title:'강당',bg:'broadcast',char:'seoyoon',text:'강당에는 서윤, 태오, 유빈이 모여 있었다.\n서윤이 입을 열었다.\n\n“도윤이 안 보여.”\n\n서윤은 당신 쪽을 봤다.\n“플레이어, 혹시 뭐 아는 거 있어?”',choices:[['다음','br2']]},
 br2:{p:'9',title:'강당',bg:'broadcast',char:'seoyoon',text:'“마지막으로 같이 있었던 사람 있어?”',choices:[['대답한다','choiceLast']]},
 choiceLast:{title:'어떻게 할까?',bg:'broadcast',char:'seoyoon',choices:[['마지막으로 같이 있었다고 말한다.','lastA',{truth:1,sus:2}],['아무 말도 하지 않는다.','lastB',{suspect:'player',lie:1,sus:1}],['도윤이 어딨는데?','lastC',{sus:1}],['다른 사람들 반응을 본다.','lastD',{truth:1}]]},
@@ -138,7 +142,7 @@ afterDeath:{p:'12',title:'사망 발표',bg:'broadcast',text:'당신은 아무 �
 choiceAfterDeath:{title:'어떻게 할까?',bg:'broadcast',choices:[['수련원 준비실 이야기를 꺼낸다.','adA',{suspect:'seoyoon',sus:2,truth:1}],['아직 말하지 않는다.','adB',{suspect:'player',lie:1}],['단톡방을 확인한다.','adC',{suspect:'seoyoon',chatObs:1,truth:1}],['유빈을 본다.','adD',{suspect:'yubin',yubin:1}]]},
 adA:{p:'13',title:'강당',bg:'broadcast',text:'“나... 수련원 준비실에 갔던 것 같아.”\n\n모두의 시선이 당신에게 꽂혔다.',choices:[['현장으로 간다','invest1']]},
 adB:{p:'13',title:'강당',bg:'broadcast',text:'말하지 않았다.\n말하는 순간, 모든 게 나를 향할 것 같았다.',choices:[['현장으로 간다','invest1']]},
-adC:{p:'13',title:'단톡방',bg:'class',text:'단톡방 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
+adC:{p:'13',title:'단톡방',bg:'broadcast',text:'단톡방 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
 adD:{p:'13',title:'강당',bg:'broadcast',char:'yubin',text:'유빈은 걱정스러운 얼굴로 당신을 보고 있었다.\n\n“플레이어, 괜찮아?”\n\n그 표정이 이상하게 편해서, 더 불안했다.',choices:[['현장으로 간다','invest1']]},
 invest1:{p:'14',title:'수련원 준비실',bg:'science',text:'수련원 준비실은 통제되어 있었다.\n하지만 문 너머로 보이는 것들이 있었다.\n\n책상 모서리.\n바닥의 작은 조각.\n도윤의 팔.',choices:[['무엇을 먼저 볼까?','choiceInspect1']]},
 choiceInspect1:{title:'무엇을 먼저 볼까?',bg:'science',choices:[['내 상태를 확인한다.','headEvidence',{truth:2,inv:['뒤통수 상처','뒤통수에 최근 충격 흔적이 있다. 내가 먼저 쓰러졌을 가능성이 생겼다.']}],['바닥의 작은 조각을 본다.','glassEvidence',{truth:1,yubin:1,inv:['깨진 액정 조각','수련원 준비실 바닥에서 발견된 휴대폰 액정 조각. 내 것도 도윤 것도 아닌 듯하다.']}],['도윤의 팔을 본다.','biteEvidence',{truth:1,inv:['도윤 팔의 교흔','도윤의 팔에 남은 물린 자국. 누군가 도윤과 몸싸움을 했다.']}],['아무것도 보지 않는다.','noEvidence',{suspect:'player',sus:1}]]},
@@ -320,6 +324,19 @@ export default function App() {
   const [nameInput, setNameInput] = useState("");
   const [modal, setModal] = useState(null);
 
+  useEffect(() => {
+    const preloadImages = new Set([
+      ...Object.values(BGNAME),
+      ...Object.values(CHAR).filter(Boolean),
+      ...ENDINGS.map((ending) => ending.image),
+    ]);
+
+    preloadImages.forEach((src) => {
+      const image = new Image();
+      image.src = src;
+    });
+  }, []);
+
   const scene = SCENES[state.scene] || SCENES.start;
   const isStart = !!scene.start;
   const isChoiceView = view === "choice";
@@ -444,12 +461,6 @@ export default function App() {
   const btnLabel =
     scene.choices && scene.choices.length === 1 ? scene.choices[0][0] : "선택하기";
 
-  const endingStyle = scene.endingImage
-    ? {
-        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,.04) 0%, rgba(0,0,0,.18) 46%, rgba(0,0,0,.92) 100%), url("${scene.endingImage}")`,
-      }
-    : { "--scene-bg": bg };
-
   return (
     <div className={`app ${isStart ? "app-main" : ""}`}>
       <header>
@@ -461,7 +472,7 @@ export default function App() {
           이전
         </button>
         <div className="top-title" />
-        <div className="progress">{scene.p || ""}</div>
+        <div className="progress">{scene.p ? (scene.p === "END" ? "END" : `ep.${scene.p}`) : ""}</div>
       </header>
 
       <main id="screen">
@@ -488,6 +499,7 @@ export default function App() {
           </div>
         ) : isChoiceView || isChoiceOnlyScene(state.scene) ? (
           <div
+            key={`choice-${state.scene}`}
             className="choice-page"
             style={{ "--scene-bg": bg, "--choice-bg": choiceBg }}
           >
@@ -504,24 +516,32 @@ export default function App() {
             </div>
           </div>
         ) : scene.p === "END" ? (
-          <div className="ending-page" style={endingStyle}>
-            <div className="ending-card">
-              <h2>{scene.title}</h2>
-              <p>{fillText(scene.text, state)}</p>
+          <div key={`ending-${state.scene}`} className="ending-page">
+            <div className="ending-hero">
+              {scene.endingImage ? <img key={`ending-img-${state.scene}`} src={scene.endingImage} alt="" /> : null}
             </div>
-            <div className="actions ending-actions">
-              {scene.choices ? (
-                <button className="primary" onClick={showChoices}>
-                  {btnLabel}
-                </button>
-              ) : null}
+
+            <div className="ending-result">
+              <div className="ending-card">
+                <div className="ending-kicker">ENDING {getEndingIndex(state.scene)}</div>
+                <h2>{scene.title}</h2>
+                <p>{fillText(scene.text, state)}</p>
+              </div>
+
+              <div className="actions ending-actions">
+                {scene.choices ? (
+                  <button className="primary" onClick={showChoices}>
+                    {btnLabel}
+                  </button>
+                ) : null}
+              </div>
             </div>
           </div>
         ) : (
-          <div className="scene" style={{ "--scene-bg": bg }}>
+          <div key={`scene-${state.scene}`} className={`scene scene-${state.scene}`} style={{ "--scene-bg": bg }}>
             <div className="bg" />
             <div className={`char ${ch ? "" : "none"} char-${scene.char || "none"}`}>
-              {ch ? <img src={ch} alt="" /> : null}
+              {ch ? <img key={`${state.scene}-${scene.char}-${ch}`} src={ch} alt="" /> : null}
             </div>
             <div className="card">
               <h2>{scene.title}</h2>
