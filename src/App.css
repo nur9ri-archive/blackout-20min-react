@@ -790,9 +790,9 @@ header {
 
 /* ep.7 휴대폰 이미지 전용: 여기만 수정하면 됩니다 */
 .scene-call .char.char-phone {
-  width: 76% !important;
-  max-width: 320px !important;
-  bottom: 360px !important;
+  width: 72% !important;
+  max-width: 280px !important;
+  bottom: 390px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 4 !important;
