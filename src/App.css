@@ -463,82 +463,117 @@ header .progress {
   padding: 76px 18px 28px;
   display: flex;
   flex-direction: column;
+  gap: 0;
   overflow-y: auto;
   background:
     radial-gradient(circle at 50% 0%, rgba(255,255,255,.08), transparent 34%),
     linear-gradient(180deg, #11131c 0%, #07080d 100%);
 }
 
+/* 엔딩 이미지: 캔버스 너비만큼 꽉 차고, 세로는 이미지 원본 비율대로 전체 노출 */
 .ending-hero {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 46vh;
-  max-height: 56vh;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  flex: 0 0 auto;
+
   overflow: hidden;
+  margin: 0 !important;
+
   border: 1px solid rgba(255,255,255,.16);
-  border-radius: 28px 28px 14px 14px;
+  border-bottom: 0;
+  border-radius: 28px 28px 0 0;
+
   background: #05060a;
   box-shadow: 0 24px 60px rgba(0,0,0,.48);
 }
 
 .ending-hero img {
   display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 46vh;
-  object-fit: cover;
-  object-position: center top;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  object-fit: unset !important;
+  object-position: center top !important;
+  background: transparent !important;
 }
 
+/* 이미지 하단 쉐도우 */
 .ending-hero::after {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 42%;
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(0,0,0,.05) 0%,
-    rgba(0,0,0,.02) 48%,
-    rgba(0,0,0,.36) 100%
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.42) 42%,
+    rgba(0,0,0,.86) 100%
   );
 }
 
+/* 엔딩 번호 + 제목: 이미지 최하단 오버레이 */
+.ending-title-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 0 24px 26px;
+  pointer-events: none;
+}
+
+.ending-kicker {
+  margin: 0 0 10px;
+  color: rgba(255,255,255,.68);
+  font-family: "Noto Serif KR", serif;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 14px rgba(0,0,0,.9);
+}
+
+.ending-title-overlay h2 {
+  margin: 0;
+  color: rgba(255,255,255,.98);
+  font-family: "Noto Serif KR", serif;
+  font-size: 30px;
+  line-height: 1.18;
+  letter-spacing: -1.2px;
+  text-shadow: 0 3px 18px rgba(0,0,0,.95);
+}
+
+/* 결과 카드: 이미지가 끝난 바로 다음 줄에서 시작 */
 .ending-result {
   position: relative;
   z-index: 3;
   width: 100%;
-  margin-top: -26px;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
 }
 
 .ending-card {
   width: 100%;
   margin: 0 0 16px;
   padding: 26px 24px 24px;
+
   border: 1px solid rgba(255,255,255,.18);
-  border-radius: 26px;
+  border-radius: 0 0 26px 26px;
+
   background: rgba(10,12,20,.94);
   backdrop-filter: blur(12px);
   box-shadow: 0 22px 60px rgba(0,0,0,.56);
-}
-
-.ending-kicker {
-  margin: 0 0 10px;
-  color: rgba(255,255,255,.52);
-  font-family: "Noto Serif KR", serif;
-  font-size: 13px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 4px;
-}
-
-.ending-card h2 {
-  margin: 0 0 18px;
-  color: rgba(255,255,255,.96);
-  font-family: "Noto Serif KR", serif;
-  font-size: 30px;
-  line-height: 1.18;
-  letter-spacing: -1.2px;
 }
 
 .ending-card p {
@@ -559,16 +594,15 @@ header .progress {
 }
 
 @media (max-height: 760px) {
-  .ending-hero {
-    min-height: 38vh;
-    max-height: 44vh;
+  .ending-page {
+    padding-top: 66px;
   }
 
-  .ending-hero img {
-    min-height: 38vh;
+  .ending-title-overlay {
+    padding: 0 22px 22px;
   }
 
-  .ending-card h2 {
+  .ending-title-overlay h2 {
     font-size: 26px;
   }
 

@@ -41,10 +41,15 @@ const ENDINGS = [
 하지만 준비실 바닥의 감촉, 손에 묻어 있던 피, 끊긴 기억이 동시에 떠올랐다.
 
 “너 서도윤이랑 붙어다녔잖아.”
-도윤이 누군가를 웃음거리로 만들 때,
-말리기보다 같이 웃던 사람. 기억을 잃은 당신은 가장 유력한 범인이었다.
 
-`,
+도윤이 누군가를 웃음거리로 만들 때,
+말리기보다 같이 웃던 사람.
+
+기억을 잃은 당신은 가장 유력한 범인이었다.
+확실히 반박할 수 있는 말이 없었다.
+
+경찰이 당신을 데려가는 동안,
+유빈은 끝내 당신과 눈을 마주치지 않았다.`,
     ],
   },
   {
@@ -57,22 +62,33 @@ const ENDINGS = [
 
 “태오, 도윤이랑 사이 안 좋았잖아.”
 “아까도 싸웠고.”
+
 태오가 벌떡 일어났다.
 
-“야, 미쳤냐? 나 아니라고!”
+“야, 미쳤냐?”
+“나 아니라고!”
 
 목소리가 커질수록 사람들은 더 확신하는 얼굴이 됐다.
 태오의 얼굴은 사색이 되었다.
 
-“진짜 나 아니야. 나 아니라고!”
+“진짜 아니라고.”
+“나 아니야. 나 아니라고!”
 
 하지만 이미 강당 안의 시선은 태오에게 꽂혀 있었다.
-경찰이 태오에게 다가갔다. 그 순간 태오는 뒤로 물러섰다.
+누군가의 의심은 금방 모두의 확신이 됐다.
+
+경찰이 태오에게 다가갔다.
+그 순간 태오는 뒤로 물러섰다.
 
 “아니라고 했잖아!”
+
 태오는 그대로 강당 문을 밀치고 뛰쳐나갔다.
-끝까지 아니라고 소리치며, 수련원 앞에 세워져 있던 전동 휠에 올라탔다.
-경찰은 태오를 쫓았다. 멀어지는 사이렌 소리 속에서,
+끝까지 아니라고 소리치며,
+수련원 앞에 세워져 있던 전동 휠에 올라탔다.
+
+경찰은 태오를 쫓았다.
+
+멀어지는 사이렌 소리 속에서,
 강당에 남은 사람들은 아무 말도 하지 못했다.
 
 도망친 사람은 더 범인처럼 보였다.
@@ -544,12 +560,14 @@ export default function App() {
           <div key={`ending-${state.scene}`} className="ending-page">
             <div className="ending-hero">
               {scene.endingImage ? <img key={`ending-img-${state.scene}`} src={scene.endingImage} alt="" /> : null}
+              <div className="ending-title-overlay">
+                <div className="ending-kicker">ENDING {getEndingIndex(state.scene)}</div>
+                <h2>{scene.title}</h2>
+              </div>
             </div>
 
             <div className="ending-result">
               <div className="ending-card">
-                <div className="ending-kicker">ENDING {getEndingIndex(state.scene)}</div>
-                <h2>{scene.title}</h2>
                 <p>{fillText(scene.text, state)}</p>
               </div>
 
