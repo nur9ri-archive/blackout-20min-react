@@ -811,19 +811,14 @@ header {
 
 /* ep.7 phone object: fixed only on call scene */
 .scene-call .char.char-phone {
-  width: 68% !important;
-  max-width: 250px !important;
-  bottom: 300px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 4 !important;
-  filter: drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72)) !important;
+  width: 90% !important;
+  max-width: 230px !important;
+  bottom: 140px !important;
+  filter: drop-shadow(0 22px 35px rgba(0,0,0,.72)) !important;
 }
 
 .scene-call .char.char-phone img {
-  display: block !important;
   width: 100% !important;
-  max-width: 100% !important;
   height: auto !important;
   object-fit: contain !important;
 }
