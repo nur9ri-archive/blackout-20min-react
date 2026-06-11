@@ -780,9 +780,9 @@ header {
 
 /* ep.7 단톡방 푸시알림 휴대폰 전용 고정 */
 .scene-call .char.char-phone {
-  width: 68% !important;
+  width: 78% !important;
   max-width: 250px !important;
-  bottom: 315px !important;
+  bottom: 200px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 4 !important;
