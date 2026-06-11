@@ -51,7 +51,7 @@ const ENDINGS = [
     char: "yubin",
     image: "/images/ending-player-frame.webp",
     pages: [
-      "유빈이 떨리는 목소리로 말했다.\n\n“처음에 발견된 건 너였잖아.”\n“손에 피도 묻어 있었고.”\n“기억도 안 난다고 했고.”\n\n모두가 당신을 봤다.",
+      "유빈이 떨리는 목소리로 말했다.\n\n“처음에 도윤이 옆에서 발견된건 너였어.”\n“손에 피도 묻어 있었고.”\n“기억도 안 난다고 했고.”\n\n모두가 당신을 봤다.",
       "당신은 반박하려 했지만, 정확히 기억나는 게 없었다.\n\n결국 경찰은 당신을 데려갔다.",
       "수련원 창문 너머로 유빈이 보였다.\n\n유빈은 끝까지 울고 있었다.\n그래서 더 찝찝했다.",
     ],
@@ -62,7 +62,7 @@ const ENDINGS = [
     char: "taeo",
     image: "/images/ending-taeo-frame.webp",
     pages: [
-      "처음엔 아무도 확신하지 못했다.\n\n하지만 누군가 말했다.\n\n“태오, 도윤이랑 사이 안 좋았잖아.”\n“아까도 싸웠고.”\n“정전 때 강당 근처에 있었다며?”",
+      "처음엔 아무도 확신하지 못했다.\n\n하지만 누군가 말했다.\n\n“태오, 도윤이랑 사이 안 좋았잖아.”\n“아까도 싸웠고.”\n“정전 때 강당 근처에서도 싸웠다며?”",
       "말들이 하나씩 쌓였다.\n태오가 벌떡 일어났다.\n\n“야, 미쳤냐?”\n“나 아니라고!”",
       "하지만 이미 강당 안의 시선은 태오에게 꽂혀 있었다.\n\n경찰은 태오를 데려갔다.\n태오는 끝까지 아니라고 소리쳤다.",
     ],
@@ -117,6 +117,14 @@ function createEndingScenes(endings) {
 }
 
 const ENDING_SCENES = createEndingScenes(ENDINGS);
+
+function getEndingIndex(sceneKey) {
+  const index = ENDINGS.findIndex((ending) =>
+    sceneKey === ending.id || sceneKey.startsWith(`${ending.id}_`)
+  );
+
+  return index >= 0 ? String(index + 1).padStart(2, "0") : "";
+}
 
 const SCENES = {
 
@@ -450,12 +458,6 @@ export default function App() {
   const btnLabel =
     scene.choices && scene.choices.length === 1 ? scene.choices[0][0] : "선택하기";
 
-  const endingStyle = scene.endingImage
-    ? {
-        backgroundImage: `linear-gradient(180deg, rgba(0,0,0,.04) 0%, rgba(0,0,0,.18) 46%, rgba(0,0,0,.92) 100%), url("${scene.endingImage}")`,
-      }
-    : { "--scene-bg": bg };
-
   return (
     <div className={`app ${isStart ? "app-main" : ""}`}>
       <header>
@@ -510,17 +512,25 @@ export default function App() {
             </div>
           </div>
         ) : scene.p === "END" ? (
-          <div className="ending-page" style={endingStyle}>
-            <div className="ending-card">
-              <h2>{scene.title}</h2>
-              <p>{fillText(scene.text, state)}</p>
+          <div className="ending-page">
+            <div className="ending-hero">
+              {scene.endingImage ? <img src={scene.endingImage} alt="" /> : null}
             </div>
-            <div className="actions ending-actions">
-              {scene.choices ? (
-                <button className="primary" onClick={showChoices}>
-                  {btnLabel}
-                </button>
-              ) : null}
+
+            <div className="ending-result">
+              <div className="ending-card">
+                <div className="ending-kicker">ENDING {getEndingIndex(state.scene)}</div>
+                <h2>{scene.title}</h2>
+                <p>{fillText(scene.text, state)}</p>
+              </div>
+
+              <div className="actions ending-actions">
+                {scene.choices ? (
+                  <button className="primary" onClick={showChoices}>
+                    {btnLabel}
+                  </button>
+                ) : null}
+              </div>
             </div>
           </div>
         ) : (
