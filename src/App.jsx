@@ -251,7 +251,7 @@ biteEvidence:{p:'15',title:'증거',bg:'science',text:'도윤의 팔에 물린 �
 noEvidence:{p:'15',title:'현장',bg:'science',text:'더 보지 않았다.\n\n보면 볼수록, 내가 더 위험해질 것 같았다.',choices:[['다음','taeo1']]},
 taeo1:{p:'16',title:'태오',bg:'broadcast',char:'taeo',text:'태오는 벽에 기대 서 있었다.\n\n“왜?”\n“너도 나 의심하냐?”',choices:[['대답한다','choiceTaeo']]},
 choiceTaeo:{title:'태오에게 뭐라고 할까?',bg:'broadcast',char:'taeo',choices:[['너 도윤이랑 싸웠잖아.','taeoA',{suspect:'taeo',wrong:2}],['도윤이랑 마지막으로 무슨 얘기 했어?','taeoB',{suspect:'taeo',truth:1}],['넌 범인 아닌 것 같아.','taeoC',{truth:1}],['아무 말 없이 본다.','taeoD',{suspect:'player',sus:1}]]},
-taeoA:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“싸웠지.”\n“걔랑 안 싸운 사람이 있긴 해?”\n\n태오는 당신을 빤히 봤다.\n“플레이어, 너도 걔 싫어했잖아.”',choices:[['다음','yubin2']]},
+taeoA:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“싸웠지.”\n“걔랑 안 싸운 사람이 있긴 해?”\n\n태오는 당신을 빤히 봤다.\n“ㄴ너도 걔한테 약점 잡힌 거 하나쯤은 있을 거 아냐.”',choices:[['다음','yubin2']]},
 taeoB:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“마지막?”\n태오는 코웃음을 쳤다.\n\n“그 새끼가 나한테만 시비 턴 줄 알아?”\n“애들 약점 하나씩 잡고, 웃으면서 돌려 말하는 거 좋아했잖아.”\n\n태오의 목소리가 낮아졌다.\n“오늘도 누군가 하나는 울릴 생각이었겠지.”\n\n그 말에 몇몇 아이들이 고개를 돌렸다.\n태오의 분노가 이해되는 순간, 오히려 태오가 더 위험해 보였다.',choices:[['다음','yubin2']]},
 taeoC:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“그 말도 기분 더럽네.”\n“너 지금 누구 편 드는 거야?”\n\n태오는 당신을 노려봤다.\n당신이 감싸려 할수록, 태오의 날 선 반응은 더 눈에 띄었다.',choices:[['다음','yubin2']]},
 taeoD:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“뭐야.”\n“그 눈깔.”\n\n“너도 뭔가 숨기는 거 있지?”',choices:[['다음','yubin2']]},
