@@ -37,10 +37,16 @@ const ENDINGS = [
 “기억도 안 난다고 했고.”
 
 그 말은 너무 쉽게 모두의 머릿속에 들어갔다.
-누군가 범인이어야 한다면, 기억을 잃은 당신만큼 편한 사람은 없었다.`,
+
+도윤 옆에 늘 붙어 다니던 사람.
+도윤이 누군가를 웃음거리로 만들 때, 말리기보다 같이 웃던 사람.
+기억을 잃은 당신은 가장 편한 범인이었다.`,
       `당신은 아니라고 말하려 했다.
 하지만 준비실 바닥의 감촉, 손에 묻어 있던 피, 끊긴 기억이 동시에 떠올랐다.
 
+“너 도윤이랑 제일 가까웠잖아.”
+
+누군가의 그 한마디가 강당 안에 떨어졌다.
 확실히 반박할 수 있는 말이 없었다.
 
 서윤은 고개를 숙였고, 태오는 입술만 깨물었다.
@@ -150,6 +156,7 @@ const ENDINGS = [
 
 정전.
 도윤의 목소리.
+“그때 일, 애들한테 말해도 돼?”
 그리고 유빈의 숨죽인 울음.`,
       `유빈이 작게 웃었다.
 
@@ -165,6 +172,7 @@ const ENDINGS = [
 “도윤이 어떤 애였는지.”`,
       `“여기 서도윤한테 한 번도 상처 안 받은 사람 있어?”
 “협박 안 당한 사람 있어?”
+“숨기고 싶은 일로 잡혀본 사람 없어?”
 “무시당하고, 웃음거리 되고, 참으라고만 들은 사람 없어?”
 
 유빈은 숨을 몰아쉬며 소리쳤다.
@@ -213,32 +221,30 @@ start:{title:'정전 20분',text:'고2 수련회 첫날 밤.\n산 속 수련원 
 p1:{p:'1',title:'프롤로그',bg:'science',text:'눈을 떴을 때, 가장 먼저 보인 건 수련원 준비실 천장이었다.\n머리가 깨질 듯 아팠다.\n바닥에는 서도윤이 쓰러져 있었다.',choices:[['다음','p2']]},
 p2:{p:'2',title:'프롤로그',bg:'science',char:'bloodHand',text:'손을 내려다보니 피가 묻어 있었다.\n“이게..뭐야..?”\n\n아무것도 기억나지 않았다.\n복도 계단 끝에서 발소리가 다가오는 게 느껴진다.\n“...”',choices:[['화장실로 간다','p3',{sus:1,suspect:'player'}]]},
 p3:{p:'3',title:'화장실',bg:'bath',text:'세면대 물소리가 화장실 안에 울렸다. 당신은 손을 씻었다.\n피는 지워졌지만, 머릿속은 여전히 비어 있었다.\n그때 문이 열렸다.',choices:[['다음','p4']]},
-p4:{p:'4',title:'화장실',bg:'bath',char:'yubin',text:'차유빈이었다.\n유빈은 잠깐 멈춰 섰다.\n\n“여기 있었네.”\n\n유빈은 당신의 젖은 손보다 먼저 얼굴을 봤다.\n무언가를 묻고 싶어 하는 눈이었다.\n하지만 도윤의 이름이 나오기 직전, 유빈은 말을 삼켰다.',choices:[['다음','p5']]},
-p5:{p:'5',title:'화장실',bg:'bath',char:'yubin',text:'“다들 플레이어랑 서도윤 찾고 있어.”\n\n유빈은 당신 얼굴을 가만히 바라봤다.\n조금 안도한 것 같았지만, 표정은 금방 굳었다.',choices:[['다음','p5_1']]},
-p5_1:{p:'5-1',title:'화장실',bg:'bath',char:'yubin',text:'“도윤이가 또 누굴 불러낸 것 같대.”\n“걔가 조용히 사람 부를 때는... 보통 좋은 일 아니잖아.”\n\n유빈은 억지로 웃으려다 실패했다.\n말끝이 아주 작게 떨렸다.',choices:[['다음','p5_2']]},
-p5_2:{p:'5-2',title:'화장실',bg:'bath',char:'yubin',text:'유빈은 손에 쥔 휴대폰을 너무 세게 쥐고 있었다.\n손가락 마디가 하얗게 질려 있었다.\n\n“아까부터 계속 불안해.”\n“그냥... 느낌이 안 좋아.”\n\n유빈은 말을 끝내고서야 당신의 얼굴색을 눈치챘다.\n“플레이어, 왜 그래? 어디 아파?”',choices:[['대답한다','choiceYubin1']]},
+p4:{p:'4',title:'화장실',bg:'bath',char:'yubin',text:'차유빈이었다.\n유빈은 잠깐 멈춰 섰다.\n\n“여기 있었네.”',choices:[['다음','p5']]},
+p5:{p:'5',title:'화장실',bg:'bath',char:'yubin',text:'“다들 플레이어랑 서도윤 찾고 있어.”\n유빈은 당신 얼굴을 가만히 바라봤다.\n\n“플레이어, 왜 그래? 어디 아파?”',choices:[['대답한다','choiceYubin1']]},
 choiceYubin1:{title:'어떻게 대답할까?',bg:'bath',char:'yubin',choices:[['아프긴... 괜찮아.','rY1',{sus:1}],['안 아파. 나도 서도윤 찾는 중이야.','rY2',{lie:1}],['그냥 좀 어지러워.','rY3',{truth:1}],['왜? 아파 보여?','rY4',{yubin:1}]]},
 rY1:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“괜찮은 얼굴은 아닌데.”\n유빈은 한 걸음 다가왔다.\n\n“너 손 떨려.”',choices:[['다음','call']]},
 rY2:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“그래?”\n유빈은 아주 잠깐 말을 멈췄다.\n\n“그럼 같이 찾자.”',choices:[['다음','call']]},
-rY3:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“앉을래?”\n“아니면... 강당 먼저 갈래?”\n\n유빈은 휴대폰을 확인했다.\n화면을 본 순간, 아주 짧게 숨을 멈췄다.\n\n“아니야.”\n“아무것도 아니야.”\n\n말은 그렇게 했지만, 유빈은 화면을 바로 껐다.',choices:[['다음','call']]},
+rY3:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“앉을래?”\n“아니면... 강당 먼저 갈래?”\n\n유빈은 휴대폰을 확인했다.',choices:[['다음','call']]},
 rY4:{p:'6',title:'유빈의 반응',bg:'bath',char:'yubin',text:'“응.”\n“많이.”\n\n유빈은 웃지 않았다.\n“너 지금 꼭... 뭔가 본 사람 같아.”',choices:[['다음','call']]},
 call:{p:'7',title:'강당 호출',bg:'bath',char:'phone',text:'휴대폰이 짧게 울렸다.\n휴대폰 알림이었다.\n\n한서윤: 다들 이거 보면 지금 바로 강당으로 와.',choices:[['강당으로 간다','br1']]},
-br1:{p:'8',title:'강당',bg:'broadcast',char:'seoyoon',text:'강당에는 서윤, 태오, 유빈이 모여 있었다.\n서윤이 입을 열었다.\n\n“도윤이 안 보여.”\n\n서윤은 당신 쪽을 봤다.\n“플레이어, 혹시 뭐 아는 거 있어?”',choices:[['다음','br2']]},
-br2:{p:'9',title:'강당',bg:'broadcast',char:'seoyoon',text:'“마지막으로 같이 있었던 사람 있어?”',choices:[['대답한다','choiceLast']]},
+br1:{p:'8',title:'강당',bg:'broadcast',char:'seoyoon',text:'강당에는 서윤, 태오, 유빈이 모여 있었다.\n서윤이 입을 열었다.\n\n“도윤이 안 보여.”\n\n서윤은 당신 쪽을 봤다.\n“플레이어, 혹시 뭐 아는 거 있어?”\n\n태오가 낮게 웃었다.\n“네가 모를 리가 없잖아.”\n“너 맨날 도윤이 옆에 붙어 다녔잖아.”',choices:[['다음','br2']]},
+br2:{p:'9',title:'강당',bg:'broadcast',char:'seoyoon',text:'서윤은 잠깐 태오를 제지하듯 보다가 다시 물었다.\n\n“도윤이 마지막으로 누구랑 있었는지,”\n“솔직히 다들 너부터 떠올렸을 거야.”\n\n“마지막으로 같이 있었던 사람 있어?”',choices:[['대답한다','choiceLast']]},
 choiceLast:{title:'어떻게 할까?',bg:'broadcast',char:'seoyoon',choices:[['마지막으로 같이 있었다고 말한다.','lastA',{truth:1,sus:2}],['아무 말도 하지 않는다.','lastB',{suspect:'player',lie:1,sus:1}],['도윤이 어딨는데?','lastC',{sus:1}],['다른 사람들 반응을 본다.','lastD',{truth:1}]]},
-lastA:{p:'10',title:'강당',bg:'broadcast',char:'seoyoon',text:'“...나.”\n\n순간 강당이 조용해졌다.\n서윤이 바로 물었다.\n\n“언제?”',choices:[['다음','teacher']]},
-lastB:{p:'10',title:'강당',bg:'broadcast',text:'당신은 입을 다물었다.\n손바닥에 식은땀이 났다.\n\n혹시...\n내가 정말...',choices:[['다음','teacher']]},
-lastC:{p:'10',title:'강당',bg:'broadcast',char:'taeo',text:'“도윤이 어딨는데?”\n\n태오가 짜증 섞인 얼굴로 말했다.\n“플레이어, 그걸 우리가 묻는 거잖아.”',choices:[['다음','teacher']]},
+lastA:{p:'10',title:'강당',bg:'broadcast',char:'seoyoon',text:'“...나.”\n\n순간 강당이 조용해졌다.\n누군가 아주 작게 숨을 들이켰다.\n\n도윤과 붙어 다니던 당신이, 마지막으로 도윤과 있었다.\n그 사실만으로 강당 안의 공기가 당신 쪽으로 기울었다.\n\n서윤이 바로 물었다.\n“언제?”',choices:[['다음','teacher']]},
+lastB:{p:'10',title:'강당',bg:'broadcast',text:'당신은 입을 다물었다.\n손바닥에 식은땀이 났다.\n\n침묵은 생각보다 빨리 번졌다.\n\n“왜 말을 안 해?”\n누군가 그렇게 중얼거렸다.\n\n혹시...\n내가 정말...',choices:[['다음','teacher']]},
+lastC:{p:'10',title:'강당',bg:'broadcast',char:'taeo',text:'“도윤이 어딨는데?”\n\n태오가 짜증 섞인 얼굴로 말했다.\n“플레이어, 그걸 우리가 묻는 거잖아.”\n\n몇몇 시선이 당신에게 꽂혔다.\n도윤과 가까웠던 당신이 모르는 척하는 것처럼 보인 것이다.',choices:[['다음','teacher']]},
 lastD:{p:'10',title:'강당',bg:'broadcast',text:'태오는 불쾌해 보였다.\n서윤은 침착했다.\n유빈은 당신만 보고 있었다.\n\n이상하게도, 그게 제일 신경 쓰였다.',choices:[['다음','teacher']]},
 teacher:{p:'11',title:'사망 발표',bg:'broadcast',text:'강당 문이 열렸다.\n담임이 들어왔다.\n\n“수련원 준비실에서 학생이 발견됐다.”\n“...서도윤이다.”',choices:[['다음','afterDeath']]},
 afterDeath:{p:'12',title:'사망 발표',bg:'broadcast',text:'당신은 아무 말도 하지 못했다.\n\n왜냐하면.\n당신은 이미 알고 있었기 때문이다.',choices:[['어떻게 할까?','choiceAfterDeath']]},
 choiceAfterDeath:{title:'어떻게 할까?',bg:'broadcast',choices:[['수련원 준비실 이야기를 꺼낸다.','adA',{suspect:'seoyoon',sus:2,truth:1}],['아직 말하지 않는다.','adB',{suspect:'player',lie:1}],['휴대폰 기록을 확인한다.','adC',{suspect:'seoyoon',truth:1}],['유빈을 본다.','adD',{suspect:'yubin',yubin:1}]]},
-adA:{p:'13',title:'강당',bg:'broadcast',text:'“나... 수련원 준비실에 갔던 것 같아.”\n\n모두의 시선이 당신에게 꽂혔다.',choices:[['현장으로 간다','invest1']]},
-adB:{p:'13',title:'강당',bg:'broadcast',text:'말하지 않았다.\n말하는 순간, 모든 게 나를 향할 것 같았다.',choices:[['현장으로 간다','invest1']]},
-adC:{p:'13',title:'휴대폰 기록',bg:'broadcast',text:'휴대폰에 남은 마지막 메시지는 하나였다.\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.',choices:[['현장으로 간다','invest1']]},
-adD:{p:'13',title:'강당',bg:'broadcast',char:'yubin',text:'유빈은 걱정스러운 얼굴로 당신을 보고 있었다.\n\n“플레이어, 괜찮아?”\n\n그 표정이 이상하게 편해서, 더 불안했다.',choices:[['현장으로 간다','invest1']]},
-invest1:{p:'14',title:'수련원 준비실',bg:'science',text:'수련원 준비실은 통제되어 있었다.\n하지만 문 너머로 보이는 것들이 있었다.\n\n책상 모서리.\n바닥의 작은 조각.\n도윤의 팔.',choices:[['무엇을 먼저 볼까?','choiceInspect1']]},
-choiceInspect1:{title:'무엇을 먼저 볼까?',bg:'science',choices:[['내 상태를 확인한다.','headEvidence',{truth:2}],['바닥의 작은 조각을 본다.','glassEvidence',{truth:1,yubin:1}],['도윤의 팔을 본다.','biteEvidence',{truth:1}],['아무것도 보지 않는다.','noEvidence',{suspect:'player',sus:1}]]},
+adA:{p:'13',title:'강당',bg:'broadcast',text:'“나... 수련원 준비실에 갔던 것 같아.”\n“근데 기억이 안 나.”\n\n모두의 시선이 당신에게 꽂혔다.\n도윤 옆에 있던 사람.\n정전 뒤 기억을 잃은 사람.\n\n그 두 문장이 당신을 더 수상하게 만들었다.',choices:[['현장으로 간다','invest1']]},
+adB:{p:'13',title:'강당',bg:'broadcast',text:'말하지 않았다.\n말하는 순간, 모든 게 나를 향할 것 같았다.\n\n하지만 침묵은 안전하지 않았다.\n도윤과 늘 같이 있던 당신이 조용해질수록, 사람들은 더 많은 걸 상상하기 시작했다.',choices:[['현장으로 간다','invest1']]},
+adC:{p:'13',title:'휴대폰 기록',bg:'broadcast',text:'휴대폰에 남은 마지막 메시지 근처에는 지워지다 만 대화가 있었다.\n\n20:24\n강태오: 너 진짜 그만해라.\n서도윤: 왜, 들키면 곤란한 거라도 있어?\n\n20:31\n서도윤: 나 잠깐 수련원 준비실 감.\n\n도윤은 누군가의 약점을 잡고 흔드는 데 익숙한 사람처럼 보였다.',choices:[['현장으로 간다','invest1']]},
+adD:{p:'13',title:'강당',bg:'broadcast',char:'yubin',text:'유빈은 걱정스러운 얼굴로 당신을 보고 있었다.\n\n“플레이어, 괜찮아?”\n\n그 표정이 이상하게 편해서, 더 불안했다.\n하지만 당신이 유빈을 바라보는 시간이 길어질수록, 유빈은 조금씩 고개를 숙였다.',choices:[['현장으로 간다','invest1']]},
+invest1:{p:'14',title:'수련원 준비실',bg:'science',text:'수련원 준비실은 통제되어 있었다.\n하지만 문 너머로 보이는 것들이 있었다.\n\n책상 모서리.\n바닥의 작은 조각.\n덮여진 천 아래로 드러난 도윤의 팔.',choices:[['무엇을 먼저 볼까?','choiceInspect1']]},
+choiceInspect1:{title:'무엇을 먼저 볼까?',bg:'science',choices:[['내 상태를 다시 확인한다.','headEvidence',{truth:2}],['바닥의 작은 조각을 본다.','glassEvidence',{truth:1,yubin:1}],['도윤의 팔을 본다.','biteEvidence',{truth:1}],['아무것도 보지 않는다.','noEvidence',{suspect:'player',sus:1}]]},
 headEvidence:{p:'15',title:'증거',bg:'science',text:'손을 뒤통수에 가져가자, 작은 혹이 만져졌다.\n\n내가 누군가를 때린 게 아니라.\n누군가에게 당한 건 아닐까.',choices:[['다음','taeo1']]},
 glassEvidence:{p:'15',title:'증거',bg:'science',text:'바닥에 작은 액정 조각이 있었다.\n\n내 휴대폰은 멀쩡하다.\n도윤의 휴대폰도 깨져 있지 않았다.',choices:[['다음','taeo1']]},
 biteEvidence:{p:'15',title:'증거',bg:'science',text:'도윤의 팔에 물린 자국이 있었다.\n\n정전 중, 도윤은 누군가와 몸싸움을 했다.',choices:[['다음','taeo1']]},
@@ -246,14 +252,14 @@ noEvidence:{p:'15',title:'현장',bg:'science',text:'더 보지 않았다.\n\n�
 taeo1:{p:'16',title:'태오',bg:'broadcast',char:'taeo',text:'태오는 벽에 기대 서 있었다.\n\n“왜?”\n“너도 나 의심하냐?”',choices:[['대답한다','choiceTaeo']]},
 choiceTaeo:{title:'태오에게 뭐라고 할까?',bg:'broadcast',char:'taeo',choices:[['너 도윤이랑 싸웠잖아.','taeoA',{suspect:'taeo',wrong:2}],['도윤이랑 마지막으로 무슨 얘기 했어?','taeoB',{suspect:'taeo',truth:1}],['넌 범인 아닌 것 같아.','taeoC',{truth:1}],['아무 말 없이 본다.','taeoD',{suspect:'player',sus:1}]]},
 taeoA:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“싸웠지.”\n“걔랑 안 싸운 사람이 있긴 해?”\n\n태오는 당신을 빤히 봤다.\n“플레이어, 너도 걔 싫어했잖아.”',choices:[['다음','yubin2']]},
-taeoB:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“마지막?”\n태오는 코웃음을 쳤다.\n\n“그 새끼가 나한테만 시비 턴 줄 알아?”',choices:[['다음','yubin2']]},
-taeoC:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“그 말도 기분 더럽네.”\n“너 지금 누구 편 드는 거야?”',choices:[['다음','yubin2']]},
+taeoB:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“마지막?”\n태오는 코웃음을 쳤다.\n\n“그 새끼가 나한테만 시비 턴 줄 알아?”\n“애들 약점 하나씩 잡고, 웃으면서 돌려 말하는 거 좋아했잖아.”\n\n태오의 목소리가 낮아졌다.\n“오늘도 누군가 하나는 울릴 생각이었겠지.”\n\n그 말에 몇몇 아이들이 고개를 돌렸다.\n태오의 분노가 이해되는 순간, 오히려 태오가 더 위험해 보였다.',choices:[['다음','yubin2']]},
+taeoC:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“그 말도 기분 더럽네.”\n“너 지금 누구 편 드는 거야?”\n\n태오는 당신을 노려봤다.\n당신이 감싸려 할수록, 태오의 날 선 반응은 더 눈에 띄었다.',choices:[['다음','yubin2']]},
 taeoD:{p:'17',title:'태오',bg:'broadcast',char:'taeo',text:'“뭐야.”\n“그 눈깔.”\n\n“너도 뭔가 숨기는 거 있지?”',choices:[['다음','yubin2']]},
-yubin2:{p:'18',title:'유빈',bg:'hall',char:'yubin',text:'유빈의 휴대폰 화면이 켜졌다.\n액정 한쪽이 깨져 있었다.\n\n유빈은 반사적으로 화면을 몸 쪽으로 돌렸다.\n너무 빠른 동작이었다.\n\n“아...”\n\n유빈의 목소리가 작게 갈라졌다.\n당신은 수련원 준비실 바닥의 액정 조각을 떠올렸다.',choices:[['어떻게 할까?','choiceYubin2']]},
-choiceYubin2:{title:'유빈에게 어떻게 할까?',bg:'hall',char:'yubin',choices:[['액정 언제 깨졌어?','yuA',{suspect:'yubin',yubin:2,truth:1}],['현장에서 액정 조각 봤어.','yuB',{suspect:'yubin',yubin:2,truth:1}],['아무것도 묻지 않는다.','yuC',{lie:1}],['내 휴대폰도 확인한다.','yuD',{suspect:'yubin',truth:1}]]},
-yuA:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'“아, 이거?”\n유빈은 휴대폰을 뒤집어 쥐었다.\n\n“아까 떨어뜨렸어.”\n“그냥... 복도에서.”\n\n대답은 빨랐다.\n너무 빨라서, 미리 준비해 둔 말처럼 들렸다.\n\n“왜?”\n유빈은 웃으려 했지만 입꼬리가 올라가지 않았다.',choices:[['다음','prePolice1']]},
-yuB:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'유빈의 표정이 아주 잠깐 멈췄다.\n정말 잠깐이었다.\n\n눈동자가 흔들렸고, 손은 휴대폰을 더 깊이 감쌌다.\n\n“그래?”\n“그런 게 있었어?”\n\n유빈은 당신이 아니라, 당신 뒤쪽의 어두운 복도를 보고 있었다.\n마치 그곳에 아직 누가 서 있는 것처럼.',choices:[['다음','prePolice1']]},
-yuC:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'유빈은 아무 일 없다는 듯 말했다.\n\n“가자.”\n“혼자 있지 말고.”\n\n그 말은 당신을 걱정하는 말 같았다.\n하지만 이상하게도, 유빈 자신에게 하는 말처럼 들렸다.\n혼자 남으면 무너질 것 같은 사람의 목소리였다.',choices:[['다음','prePolice1']]},
+yubin2:{p:'18',title:'유빈',bg:'hall',char:'yubin',text:'유빈의 휴대폰 화면이 켜졌다.\n액정 한쪽이 깨져 있었다.\n\n당신은 수련원 준비실 바닥의 액정 조각을 떠올렸다.',choices:[['어떻게 할까?','choiceYubin2']]},
+choiceYubin2:{title:'유빈에게 어떻게 할까?',bg:'hall',char:'yubin',choices:[['액정 언제 깨졌어?','yuA',{suspect:'yubin',yubin:2,truth:1}],['현장에서 유리 조각 같은 걸 봤어.','yuB',{suspect:'yubin',yubin:2,truth:1}],['아무것도 묻지 않는다.','yuC',{lie:1}],['내 휴대폰도 확인한다.','yuD',{suspect:'yubin',truth:1}]]},
+yuA:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'“아, 이거?”\n유빈은 휴대폰을 뒤집어 쥐었다.\n\n“아까 떨어뜨렸어.”\n“왜?”',choices:[['다음','prePolice1']]},
+yuB:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'유빈의 표정이 아주 잠깐 멈췄다.\n정말 잠깐이었다.\n\n“그래?”\n“그런 게 있었어?”',choices:[['다음','prePolice1']]},
+yuC:{p:'19',title:'유빈',bg:'hall',char:'yubin',text:'유빈은 아무 일 없다는 듯 말했다.\n\n“가자.”\n“혼자 있지 말고.”',choices:[['다음','prePolice1']]},
 yuD:{p:'19',title:'휴대폰',bg:'hall',text:'당신의 휴대폰은 멀쩡했다.\n\n그렇다면 수련원 준비실의 액정 조각은\n당신 것도, 도윤 것도 아니다.',choices:[['다음','prePolice1']]},
 
 prePolice1:{p:"20",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"강당으로 돌아오자 서윤이 휴대폰을 내려놓았다.\n\n그때 누군가 말했다.\n\n“정전 직전에 준비실 쪽으로 간 사람을 봤다는 얘기가 있어.”",choices:[["다음","prePolice1_2"]]},
@@ -262,18 +268,18 @@ prePolice1A:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"“�
 prePolice1B:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"seoyoon",text:"당신은 목격담이 너무 애매하다고 말했다.\n\n하지만 그 말이 오히려 이상하게 들렸다.\n\n“왜 네가 서윤을 감싸?”\n\n시선 일부가 다시 당신에게 돌아왔다.",choices:[["다음","prePolice2"]]},
 prePolice1C:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"yubin",text:"당신은 유빈을 봤다.\n\n유빈은 고개를 숙이고 있었다.\n\n그 순간만큼은 유빈보다 서윤 쪽에 더 많은 시선이 쏠려 있었다.",choices:[["다음","prePolice2"]]},
 prePolice1D:{p:"20-1",title:"추궁 1",bg:"broadcast",char:"taeo",text:"태오는 인상을 찌푸렸다.\n\n“왜 또 나를 봐.”\n\n태오의 말투는 날카로웠지만, 이번 목격담과는 잘 맞지 않았다.",choices:[["다음","prePolice2"]]},
-prePolice2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"그때 서윤의 휴대폰 화면이 켜졌다.\n\n잠금화면 위로 도윤에게서 온 예전 메시지 일부가 보였다.",choices:[["다음","prePolice2_2"]]},
-prePolice2_2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"[오늘 밤까지 말 안 하면 다 퍼뜨린다]\n\n서윤이 급하게 화면을 껐다.\n\n강당 안 공기가 바뀌었다.",choices:[["서윤에게 협박받았냐고 묻는다","prePolice2A",{suspect:"seoyoon",points:2}],["왜 숨겼는지 묻는다","prePolice2B",{suspect:"seoyoon",points:1}],["유빈의 위치 진술을 다시 묻는다","prePolice2C",{suspect:"yubin",yubin:1,truth:1}],["태오와 도윤의 다툼을 꺼낸다","prePolice2D",{suspect:"taeo"}]]},
-prePolice2A:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“도윤한테 협박받고 있었어?”\n\n서윤은 입술을 깨물었다.\n\n“...그건 사건이랑 상관없어.”\n\n하지만 이미 늦었다.\n원한이 있었다는 말은, 모두에게 가장 이해하기 쉬운 이유가 됐다.",choices:[["다음","prePolice3"]]},
+prePolice2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"그때 서윤의 휴대폰 화면이 켜졌다.\n\n잠금화면 위로 도윤에게서 온 예전 메시지 일부가 보였다.\n서윤은 화면을 보자마자 숨을 삼켰다.",choices:[["다음","prePolice2_2"]]},
+prePolice2_2:{p:"21",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"[오늘 밤까지 준비 안 하면 다 퍼뜨린다]\n\n그 아래에는 더 오래된 메시지도 겹쳐 보였다.\n\n[반장님 범생이 이미지 지키고 싶으면 조용히 해]\n\n서윤이 급하게 화면을 껐다.\n강당 안 공기가 바뀌었다.",choices:[["도윤이 협박했냐고 묻는다","prePolice2A",{suspect:"seoyoon",points:2}],["왜 숨겼는지 묻는다","prePolice2B",{suspect:"seoyoon",points:1}],["유빈의 위치 진술을 다시 묻는다","prePolice2C",{suspect:"yubin",yubin:1,truth:1}],["태오와 도윤의 다툼을 꺼낸다","prePolice2D",{suspect:"taeo"}]]},
+prePolice2A:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“도윤이 협박했어?”\n\n서윤은 입술을 깨물었다.\n\n“...그건 사건이랑 상관없어.”\n\n하지만 이미 늦었다.\n커닝 문제로 협박받고 있었다는 말은, 모두에게 가장 이해하기 쉬운 원한이 됐다.\n\n서윤의 침묵이 대답처럼 번졌다.",choices:[["다음","prePolice3"]]},
 prePolice2B:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"seoyoon",text:"“왜 숨겼어?”\n\n서윤은 한참 뒤에야 말했다.\n\n“말하면 더 커질까 봐.”\n\n그 말은 현실적이었다.\n하지만 동시에 변명처럼 들렸다.",choices:[["다음","prePolice3"]]},
-prePolice2C:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"yubin",text:"당신은 유빈에게 물었다.\n\n“정전됐을 때 정확히 어디 있었어?”\n\n유빈은 잠깐 늦게 대답했다.\n\n“나는... 별관 복도.”\n\n별관 쪽이면 준비실과 멀지 않았다.",choices:[["다음","prePolice3"]]},
+prePolice2C:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"yubin",text:"당신은 유빈에게 물었다.\n\n“정전됐을 때 정확히 어디 있었어?”\n\n유빈은 잠깐 늦게 대답했다.\n\n“나는... 별관 복도.”\n\n별관 쪽이면 준비실과 멀지 않았다.\n그 짧은 정적을, 강당 안의 모두가 들은 것 같았다.",choices:[["다음","prePolice3"]]},
 prePolice2D:{p:"21-1",title:"추궁 2",bg:"broadcast",char:"taeo",text:"당신은 태오와 도윤이 다퉜다는 이야기를 꺼냈다.\n\n태오가 바로 목소리를 높였다.\n\n“싸운 거랑 죽인 거랑 같냐?”\n\n태오의 반응은 거칠었다.\n그래서 누군가에겐 더 수상해 보였다.",choices:[["다음","prePolice3"]]},
 
-prePolice3:{p:"22",title:"추궁 3",bg:"science",char:"none",text:"머리가 다시 아파왔다.\n\n끊긴 기억 사이로 짧은 장면이 떠올랐다.\n\n도윤의 낮은 목소리.\n숨을 죽이고 우는 누군가.\n바닥에 떨어지는 휴대폰 소리.\n\n누군가 도윤을 밀쳤다.\n누군가 당신 쪽을 돌아봤다.\n그리고 정전.",choices:[["그 얼굴을 떠올린다","prePolice3A",{suspect:"yubin",truth:2}],["기억을 억지로 누른다","prePolice3B",{suspect:"player",sus:1}],["도윤의 팔을 떠올린다","prePolice3C",{suspect:"taeo",truth:1}],["서윤의 협박 메시지를 떠올린다","prePolice3D",{suspect:"seoyoon",points:1}]]},
-prePolice3A:{p:"22-1",title:"추궁 3",bg:"science",char:"yubin",text:"흐릿했던 얼굴이 조금씩 선명해졌다.\n\n겁에 질린 눈.\n떨리던 손.\n입술을 깨물고 울음을 참던 얼굴.\n\n차유빈이었다.\n\n유빈은 도윤을 보고 있었고, 동시에 당신도 보고 있었다.\n그 눈은 도움을 청하는 것 같기도 했고, 절대 말하지 말라고 비는 것 같기도 했다.",choices:[["다음","finalAsk"]]},
+prePolice3:{p:"22",title:"추궁 3",bg:"science",char:"none",text:"머리가 다시 아파왔다.\n\n끊긴 기억 사이로 짧은 장면이 떠올랐다.\n\n누군가 도윤을 밀쳤다.\n누군가 당신 쪽을 돌아봤다.\n그리고 정전.",choices:[["그 얼굴을 떠올린다","prePolice3A",{suspect:"yubin",truth:2}],["기억을 억지로 누른다","prePolice3B",{suspect:"player",sus:1}],["도윤의 팔을 떠올린다","prePolice3C",{suspect:"taeo",truth:1}],["서윤의 협박 메시지를 떠올린다","prePolice3D",{suspect:"seoyoon",points:1}]]},
+prePolice3A:{p:"22-1",title:"추궁 3",bg:"science",char:"yubin",text:"흐릿했던 얼굴이 조금씩 선명해졌다.\n\n겁에 질린 눈.\n떨리던 손.\n\n차유빈이었다.",choices:[["다음","finalAsk"]]},
 prePolice3B:{p:"22-1",title:"추궁 3",bg:"science",text:"떠올리면 안 될 것 같았다.\n\n하지만 피할수록 더 선명해지는 것들이 있다.\n\n이제 누군가는 지목해야 한다.",choices:[["다음","finalAsk"]]},
 prePolice3C:{p:"22-1",title:"추궁 3",bg:"science",text:"도윤의 팔.\n물린 자국.\n\n그건 일방적인 폭행이 아니었다.\n누군가 도윤에게서 벗어나려 했다.",choices:[["다음","finalAsk"]]},
-prePolice3D:{p:"22-1",title:"추궁 3",bg:"science",char:"yubin",text:"정전 직전, 누군가 이렇게 말했었다.\n\n“그만해.”\n“도윤아, 제발.”\n\n그 목소리는 차유빈이었다.\n낮고 작았지만, 오래 참은 사람이 마지막으로 내는 목소리였다.\n\n그다음 들린 건 휴대폰이 바닥에 부딪히는 소리였다.",choices:[["다음","finalAsk"]]},
+prePolice3D:{p:"22-1",title:"추궁 3",bg:"science",char:"yubin",text:"정전 직전, 누군가 이렇게 말했었다.\n\n“그만해.”\n\n그 목소리는 차유빈이었다.",choices:[["다음","finalAsk"]]},
 
 finalAsk:{p:'23',title:'마지막 판단',bg:'broadcast',text:'경찰이 도착했다.\n\n수련원 강당 안은 조용했다.\n누군가를 직접 지목하지 않아도, 지금까지의 말과 선택은 이미 한 사람을 향하고 있었다.',choices:[['결말 확인하기','AUTO_END']]},
 
