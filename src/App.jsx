@@ -504,6 +504,17 @@ export default function App() {
                   </button>
                 ) : null}
               </div>
+              <div className="ending-footer">
+                <p>© 2026 만든이 너굴이. All rights reserved.</p>
+                <a
+                  href="https://blog.naver.com/nur9ri"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="developer-link"
+                >
+                  개발자 너굴이 만나기
+                </a>
+              </div>
             </div>
           </div>
         ) : (

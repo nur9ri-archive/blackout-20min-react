@@ -637,3 +637,45 @@ input,
 .progress {
   font-weight: 400 !important;
 }
+
+
+.ending-footer {
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 8px 0 28px;
+  text-align: center;
+}
+
+.ending-footer p {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.developer-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 38px;
+  padding: 0 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+
+  backdrop-filter: blur(10px);
+}
+
+.developer-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
